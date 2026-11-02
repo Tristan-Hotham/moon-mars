@@ -1,0 +1,157 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\newfontfamily\headfont{Inter}[UprightFont=*-ExtraBold,BoldFont=*-ExtraBold,Extension=.otf,Path=/usr/share/fonts/opentype/inter/]
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{graphicx,booktabs,float,caption,array,xcolor,longtable}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[round]{natbib}
+\usepackage{setspace}
+\setstretch{1.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\titleformat{\section}{\headfont\Large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\headfont\large}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\urlstyle{same}
+\hypersetup{pdftitle={Junk on the Moon and Mars},pdfauthor={Tristan Hotham}}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries Junk on the Moon and Mars\par}
+\vspace{0.4em}
+{\large An inventory of every human-made object on two worlds,\\built from Wikipedia's lists: {{moon.n|int}} objects on the Moon and {{mars.n|int}} on Mars\par}
+\vspace{1.2em}
+{\large Tristan Hotham\par}
+\vspace{0.3em}
+{\small Independent researcher\\
+ORCID: 0000-0003-4931-9349\\
+DOI: \href{https://doi.org/{{meta.doi}}}{https://doi.org/{{meta.doi}}}\par}
+\vspace{0.8em}
+2026
+\end{center}
+
+\begin{quote}
+\small
+\begin{center}\textbf{Abstract}\end{center}
+I build a single, mapped inventory of the human-made objects on the Moon and Mars from English Wikipedia's lists of artificial objects on the two bodies, its list of landings on extraterrestrial bodies, and the articles that name the small items left by the Apollo crews. The inventory holds {{moon.n|int}} objects on the Moon ({{moon.n_table|int}} table rows and {{moon.n_items|int}} small items) and {{mars.n|int}} on Mars ({{mars.n_table|int}} rows and {{mars.n_items|int}} smaller pieces). Counting each listed mass once, {{mass.moon_kg|int}} kg of hardware lies on the Moon, {{mass.us_moon_pct|int}}\% of it American and {{mass.su_moon_pct|int}}\% Soviet or Russian, against {{mass.mars_kg|int}} kg on Mars. Five spent Saturn V third stages, crashed on purpose, make up {{mass.sivb_pct|int}}\% of the lunar total. Arrivals came in two waves: {{boom.moon_1960s_table|int}} objects in the 1960s and {{boom.moon_1970s_table|int}} in the 1970s, none between 1977 and 1989, and {{boom.moon_2020s_table|int}} already in the 2020s, from {{boom.n_countries|int}} countries and several private companies. Of {{land.moon.n|int}} attempted soft landings on the Moon, {{land.moon.ok|int}} ({{land.moon.pct|int}}\%) succeeded; on Mars, {{land.mars.ok|int}} of {{land.mars.n|int}} ({{land.mars.pct|int}}\%), {{land.mars.by.United States.ok|int}} of {{land.mars.by.United States.n|int}} for the United States. Only {{moon.far_table|int}} of the {{moon.with_coords_table|int}} located lunar objects lie on the far side, and only {{moon.working|word}} lunar and {{mars.working|word}} Martian objects are listed as still operating, although six retroreflectors on the Moon are still used for laser ranging. I document how the tables were parsed, where the sources disagree, and what the inventory leaves out.
+
+\textbf{Keywords:} Moon; Mars; space exploration; spacecraft; lunar landings; Mars landings; space heritage; Wikipedia; open data; mapping
+\end{quote}
+
+\section{Introduction}
+Since the Soviet probe Luna 2 struck the Moon on 13 September 1959, spacecraft from a growing number of countries, and lately from private companies, have landed on, crashed into or been abandoned on the Moon and Mars. The hardware they left is an unusual archive: a record of engineering success and failure, of national programmes and their priorities, and of objects that some have argued deserve protection as heritage. Yet there is no single authoritative public inventory of it. Space agencies document their own missions; the most convenient public compilations are the lists maintained by Wikipedia's editors.
+
+This paper turns those lists into one consistent, mapped table and asks simple questions of it. How many objects are on each body, and how much do they weigh? Who left them, and when? How many arrived intact, and how many still work? How often do soft landings succeed? Where are they, and how many lie on the Moon's far side? The paper accompanies an interactive map (\url{{{meta.page}}}).
+
+\section{Data}
+\textbf{Object tables.} The article ``List of artificial objects on the Moon'' \citep{wikimoon} contains a table of {{moon.n_table|int}} objects with country or agency, year, mass in pounds and kilograms, status, location and notes; its rows are coloured by a legend (crashed unintentionally; impactor or post-mission crash; landed; operational), and a final row gives the article's total. ``List of artificial objects on Mars'' \citep{wikimars} contains {{mars.n_table|int}} rows with year, agency, mission, objects, mass, status and location, coloured success, operational or failure.
+
+\textbf{Landings.} ``List of landings on extraterrestrial bodies'' \citep{wikilandings} lists, for the Moon and Mars, each landing or impact with its date, coordinates and notes, coloured by outcome. I use it for arrival dates and for the success of soft landing attempts.
+
+\textbf{Small items.} The Moon list states that its table omits ``lesser'' Apollo objects such as tools, retroreflectors, the science packages and the commemorative and personal objects left by the astronauts. I add {{moon.n_items|int}} such items named in the introduction of that list and in the articles ``Moon landing'' \citep{wikimoonlanding}, ``Fallen Astronaut'' \citep{wikifallen}, ``Apollo Lunar Surface Experiments Package'' \citep{wikialsep} and ``Lunar Roving Vehicle'' \citep{wikilrv}, and {{mars.n_items|int}} pieces named in the text of the Mars list. ``List of missions to the Moon'' and ``List of missions to Mars'' \citep{wikimissionsmoon,wikimissionsmars} were consulted for context. Three titles requested for this study (on golf on the Moon, the Apollo flags and lunar laser ranging) do not exist under those names and are not used.
+
+\textbf{Base maps.} Static figures and the interactive map use the OpenPlanetaryMap lunar and Martian basemaps \citep{opm}, built from NASA and USGS data.
+
+{{TABLE_MASS}}
+
+\section{Methods}
+\subsection{Parsing}
+Tables were read from the parsed HTML with BeautifulSoup and expanded cell by cell, honouring row and column spans, so that a value written once for two rows is attached to both. Footnote markers were removed. Positions come from the decimal coordinates embedded in each location cell. The Mars table gives some longitudes as west longitudes beyond 180 degrees (Mars 2 at 313°W) or as east longitudes from 0 to 360 (Opportunity at 354.47°E); all longitudes were wrapped to the range $-180$ to $180$. Objects without coordinates ({{moon.no_coords|int}} on the Moon) keep none.
+
+\subsection{Mass}
+Masses are the tables' kilograms. Where a mass cell spans two rows (Hakuto-R Mission 1 and the Emirates Lunar Mission it carried) it is counted once, and where a rover row repeats its lander's figure exactly (Chang'e 3 and Yutu; Chang'e 4 and Yutu-2) the figure is counted once. Upper and lower bounds (Luna 20 and 24 descent stages; the Chang'e 5 and 6 ascent stages) and masses the table marks as launch masses (Luna 8) or as measured before a capsule was released (Luna 9) are taken as given. Small items have no mass. The sum, {{mass.moon_kg|int}} kg, differs from the article's own table total ({{mass.wiki_table_kg|int}} kg) and from the figure in its introduction (``over {{wiki.intro_kg|raw}} kilograms''); I report all three.
+
+\subsection{Type and status}
+Each row was classified by its name and status as a rocket or ascent stage (S-IVB third stages, the Luna 2 and Chang'e 5-T1 rocket stages, the LCROSS Centaur, a Falcon 9 upper stage, the Apollo Lunar Module and Chang'e ascent stages, and stages that crashed after separation), a rover (including small hoppers and Mars's Ingenuity helicopter), an impact or crash (a hard arrival that is not a stage) or a lander (a soft arrival). Rows that combine a lander and a rover, such as ``Luna 17 and Lunokhod 1'', are kept as one object, as in the source. Status follows the row colours. On the Moon, soft-landed means coloured landed or operational. On Mars, it also includes Mars 3 and Beagle 2, which the table colours as failures but whose status text says they reached the surface intact. ``Still working'' means coloured operational.
+
+\subsection{Landing success}
+A soft landing attempt is a row of the landings list that the article colours as a soft landing with data return, sample return or crewed landing (a success), or whose note describes an unsuccessful or failed landing, lost contact or a crash, excluding deliberate impacts. Every Mars row is an attempt. Landers that never reached their target, such as those lost at launch, are not in that list and are not counted. Countries are grouped as in Table~\ref{tab:mass}; Europe on Mars combines Beagle 2 (United Kingdom with ESA) and Schiaparelli (ESA with Roscosmos).
+
+\subsection{Small items and positions}
+Each added item is supported by a sentence in its source article, which the build checks. Items are placed at the coordinates of their landing site (the Apollo descent stage, or the Mars lander), except the Fallen Astronaut and its plaque, which the article locates itself. Their positions therefore show the site, not the exact spot; some, such as heat shields and the Curiosity counterweights, lie kilometres away. Far side means a longitude more than 90 degrees east or west, the definition used in the Moon list.
+
+\section{Results}
+\subsection{How many, and how heavy}
+The inventory holds {{moon.n|int}} objects on the Moon and {{mars.n|int}} on Mars (Figures~\ref{fig:moon} and \ref{fig:mars}). The Moon's {{moon.n_table|int}} table rows comprise {{moon.types.lander|int}} landers, {{moon.types.rover|int}} rovers, {{moon.types.crash|int}} impacts or crashes and {{moon.types.stage|int}} stages; the table names {{moon.n_rovers|int}} rovers, hoppers and similar vehicles in all, counting those inside combined rows. Mars has {{mars.types.lander|int}} landers, {{mars.types.rover|int}} rovers and a helicopter, and {{mars.types.crash|int}} crash sites. Objects from {{moon.n_countries|int}} countries or agencies have reached the Moon.
+
+Counting each mass once, {{mass.moon_kg|int}} kg lies on the Moon and {{mass.mars_kg|int}} kg on Mars (Table~\ref{tab:mass}, Figure~\ref{fig:mass}). The United States left {{mass.us_moon_pct|f1}}\% of the lunar total, the Soviet Union and Russia {{mass.su_moon_pct|f1}}\% and China {{mass.moon_by.China.pct|f1}}\%. Apollo hardware accounts for {{mass.apollo_pct|f1}}\%, and the five S-IVB stages of Apollo 13 to 17, crashed for seismic research \citep{wikilandings}, for {{mass.sivb_kg|int}} kg ({{mass.sivb_pct|f1}}\%). They are the five heaviest objects on either body (Table~\ref{tab:heavy}, Figure~\ref{fig:heavy}), followed by the {{first.luna2_stage_kg|int}} kg rocket stage that accompanied Luna 2. On Mars the heaviest object is the Tianwen-1 lander ({{heaviest_mars.0.kg|int}} kg) and the United States left {{mass.us_mars_pct|f1}}\% of the total.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_moon_map.png}
+\caption{Every located object on the Moon, by type and by who left it, with a zoom on the centre of the near side. Small items are drawn as one star per site. Base map: OpenPlanetaryMap.}\label{fig:moon}\end{figure}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_mars_map.png}
+\caption{Every object on Mars. The positions of Mars 2, 3 and 6 and Mars Polar Lander are estimates. Base map: OpenPlanetaryMap.}\label{fig:mars}\end{figure}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_mass.png}
+\caption{Mass left on the Moon and Mars by country or agency, each listed figure counted once.}\label{fig:mass}\end{figure}
+
+{{TABLE_HEAVY}}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_heaviest.png}
+\caption{The twelve heaviest objects, all on the Moon.}\label{fig:heavy}\end{figure}
+
+\subsection{When}
+Arrivals came in two waves (Figure~\ref{fig:decades}). The first object, Luna 2, struck the Moon on {{first.moon_date|raw}}; {{boom.moon_1960s_table|int}} table objects arrived in the 1960s and {{boom.moon_1970s_table|int}} in the 1970s. After Luna 24 in 1976 no listed object reached the Moon until {{boom.gap_first_after|raw}}. The 2000s brought {{boom.moon_2000s_table|int}} and the 2010s {{boom.moon_2010s_table|int}}, mostly hard impacts; the 2020s have already brought {{boom.moon_2020s_table|int}}. Of these {{boom.private_n|int}} objects in the table were built or flown by companies (SpaceIL, LuxSpace, ispace and ispace Europe, Intuitive Machines, Firefly Aerospace and SpaceX), and {{boom.private_soft|int}} of them landed softly. The first object on Mars arrived on {{first.mars_date|raw}} (Mars 2); Mars received {{mars_by_decade.1970|int}} table objects in the 1970s and {{mars_by_decade.2020|int}} so far in the 2020s.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_decades.png}
+\caption{Objects arriving on the Moon and Mars per decade, by type. Years as listed in the tables.}\label{fig:decades}\end{figure}
+
+\subsection{Crashed or landed, and still working}
+Of the {{moon.n_table|int}} Moon rows, {{moon.soft|int}} ({{moon.soft_pct|int}}\%) arrived softly and {{moon.hard|int}} hard; the article's own summary row speaks of ``{{moon.table_soft_text|raw}}'', a broader count that the row colours do not reproduce. Of the {{mars.n_table|int}} Mars rows, {{mars.soft|int}} arrived softly (Figure~\ref{fig:status}). Only {{moon.working|word}} lunar objects are coloured operational, all Chinese (the Chang'e 3 and Chang'e 4 landers and the Yutu-2 rover); the article's introduction also names SLIM as still in use. On Mars, Curiosity and Perseverance are operating. The Moon list adds that the retroreflectors left by Apollo 11, 14 and 15 and carried by Lunokhod 1, Lunokhod 2 and Chandrayaan-3 are still used for laser ranging, and the ALSEP article that they are the only Apollo experiments still in use; the five ALSEP stations were supported until {{fun.alsep_end|raw}}.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_status.png}
+\caption{Status of every row of the two tables, from the row colours.}\label{fig:status}\end{figure}
+
+\subsection{Landing success}
+The landings list records {{land.moon.n|int}} soft landing attempts on the Moon, of which {{land.moon.ok|int}} ({{land.moon.pct|f1}}\%) succeeded, and {{land.mars.n|int}} on Mars, of which {{land.mars.ok|int}} ({{land.mars.pct|f1}}\%) succeeded (Table~\ref{tab:land}, Figure~\ref{fig:landing}). The first successful lunar soft landing was {{land.moon.first_soft|raw}}. China succeeded in all {{land.moon.by.China.n|int}} of its lunar attempts and in its single Mars attempt; the Soviet Union and Russia in {{land.moon.by.Soviet Union and Russia.ok|int}} of {{land.moon.by.Soviet Union and Russia.n|int}} on the Moon and {{land.mars.by.Soviet Union and Russia.ok|int}} of {{land.mars.by.Soviet Union and Russia.n|int}} on Mars. Since 2019, {{land.moon.since2019.ok|int}} of {{land.moon.since2019.n|int}} lunar attempts have succeeded, and {{land.moon.commercial.ok|int}} of the {{land.moon.commercial.n|int}} commercial ones.
+
+{{TABLE_LAND}}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_landing.png}
+\caption{Soft landing attempts and successes by country.}\label{fig:landing}\end{figure}
+
+\subsection{Near side and far side}
+Of the {{moon.with_coords_table|int}} lunar table objects with a position, {{moon.far_table|int}} ({{moon.far_pct|f1}}\%) lie on the far side, although it is half of the surface. Most of them hit the surface hard; the only soft arrivals there are China's Chang'e 4 lander and Yutu-2 rover and the Chang'e 6 lander and its Jinchan rover.
+
+\subsection{Small items}
+The {{moon.n_items|int}} small lunar items (Table~\ref{tab:items}) include the six American flags, of which ``five of the six \ldots{} are still standing'' according to LROC images \citep{wikimoonlanding}; the six ladder plaques; the Apollo 11 goodwill messages disc; Alan Bean's silver astronaut pin; Alan Shepard's golf balls; David Scott's Bible; the {{fun.fallen_cm|f1}} cm Fallen Astronaut and its plaque naming {{fun.fallen_us|int}} American astronauts and {{fun.fallen_su|int}} Soviet cosmonauts \citep{wikifallen}; three laser ranging retroreflectors; the EASEP and five ALSEP packages \citep{wikialsep}; a discarded fuel transfer tool; and Eugene Shoemaker's ashes, carried by Lunar Prospector. Some objects often mentioned, such as the falcon feather from Apollo 15 or Charles Duke's family photograph, are not named in these sources and are not included.
+
+{{TABLE_ITEMS}}
+
+\subsection{Where the sources disagree}
+For {{n_compared|int}} objects both the object tables and the landings list give coordinates. They differ by more than one degree of arc for {{n_disagree|int}} (Table~\ref{tab:disagree}), among them Luna 5, Surveyor 2, IM-1 and IM-2, Mars 2 and Mars Polar Lander. Some differences reflect uncertain crash sites; the Mars Polar Lander positions are in different hemispheres. I keep the object tables' positions throughout and publish the alternatives in the data.
+
+{{TABLE_DISAGREE}}
+
+\section{Limitations}
+First, Wikipedia is an edited compilation, not a primary record, and it changes: the inventory describes the revisions cited. Second, the tables are partial by their own account; the Mars list omits springs, fragments, parachutes and heat shields, and many small Apollo items (tools, bags, equipment) are not named anywhere in these sources. Third, masses mix dry and launch masses and include bounds, so totals are approximate. Fourth, the type classification is mine and some rows hold several objects. Fifth, small items are placed at their landing sites. Sixth, web maps cannot show latitudes beyond about 85 degrees, so the interactive map draws polar objects at its edge; the static figures and the page's polar chart show them properly. Seventh, landing success counts only attempts that reached their target.
+
+\section{Conclusion}
+About {{mass.moon_t|t0}} tonnes of hardware lie on the Moon and about {{mass.mars_t|t0}} on Mars. Most of the lunar mass is the legacy of a few years of the Cold War race, and a third of it is five rocket stages. Almost all of it is dead. The 2020s are adding objects faster than any decade since the 1970s, from more countries and from companies, with mixed results: landing on the Moon is still far from routine, and Mars remains harder. A consistent, open inventory makes those patterns visible, and shows how much of this archive is still described only loosely.
+
+\section*{Data and code availability}
+The interactive map is at \url{{{meta.page}}}. Data and code are at \url{{{meta.repo}}} and archived with this paper at \url{https://doi.org/{{meta.doi}}}. The object table derived from Wikipedia is released under CC BY-SA 4.0; other derived data and text under CC BY 4.0; code under the MIT licence.
+
+\section*{AI statement}
+I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.
+
+\begin{thebibliography}{12}
+\bibitem[OpenPlanetary(2026)]{opm} OpenPlanetary (2026) OpenPlanetaryMap basemaps: opm-moon-basemap-v0-1 and opm-mars-basemap-v0-2, from NASA and USGS data.
+\bibitem[Wikipedia(2026a)]{wikimoon} Wikipedia contributors (2026) List of artificial objects on the Moon (revision {{source.rev.List_of_artificial_objects_on_the_Moon|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/List_of_artificial_objects_on_the_Moon}
+\bibitem[Wikipedia(2026b)]{wikimars} Wikipedia contributors (2026) List of artificial objects on Mars (revision {{source.rev.List_of_artificial_objects_on_Mars|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/List_of_artificial_objects_on_Mars}
+\bibitem[Wikipedia(2026c)]{wikilandings} Wikipedia contributors (2026) List of landings on extraterrestrial bodies (revision {{source.rev.List_of_landings_on_extraterrestrial_bodies|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/List_of_landings_on_extraterrestrial_bodies}
+\bibitem[Wikipedia(2026d)]{wikimoonlanding} Wikipedia contributors (2026) Moon landing (revision {{source.rev.Moon_landing|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Moon_landing}
+\bibitem[Wikipedia(2026e)]{wikifallen} Wikipedia contributors (2026) Fallen Astronaut (revision {{source.rev.Fallen_Astronaut|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Fallen_Astronaut}
+\bibitem[Wikipedia(2026f)]{wikialsep} Wikipedia contributors (2026) Apollo Lunar Surface Experiments Package (revision {{source.rev.Apollo_Lunar_Surface_Experiments_Package|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Apollo_Lunar_Surface_Experiments_Package}
+\bibitem[Wikipedia(2026g)]{wikilrv} Wikipedia contributors (2026) Lunar Roving Vehicle (revision {{source.rev.Lunar_Roving_Vehicle|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Lunar_Roving_Vehicle}
+\bibitem[Wikipedia(2026h)]{wikimissionsmoon} Wikipedia contributors (2026) List of missions to the Moon (revision {{source.rev.List_of_missions_to_the_Moon|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/List_of_missions_to_the_Moon}
+\bibitem[Wikipedia(2026i)]{wikimissionsmars} Wikipedia contributors (2026) List of missions to Mars (revision {{source.rev.List_of_missions_to_Mars|raw}}). CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/List_of_missions_to_Mars}
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Junk on the Moon and Mars</title>
+<meta name="description" content="An interactive map of every human-made object on the Moon and Mars from Wikipedia's lists: {{moon.n|int}} on the Moon and {{mars.n|int}} on Mars, from Luna 2 in 1959 to the private landers of the 2020s. Who left it, when, how heavy it is and whether it still works.">
+<meta property="og:title" content="Junk on the Moon and Mars: every human-made object on two worlds">
+<meta property="og:description" content="{{mass.moon_t|f1}} tonnes on the Moon, {{mass.mars_t|f1}} on Mars. Landers, rovers, crashed probes, rocket stages, six flags and some golf balls, mapped.">
+<meta property="og:image" content="https://maps.tristanhotham.com/moon-mars/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/moon-mars/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+/* Two worlds on paper: lunar grey, Martian rust, the house red and blue for who left what. */
+:root{
+  --bg:#F6F4EF; --panel:#EAE7DF; --fg:#1D2128; --muted:#636A72; --rule:#DDD8CC; --card:#FFFEFA; --border:#CBC5B8;
+  --hot:#C8322B; --cool:#2F5FA7; --gold:#E0A11B; --ink:#1F2F4D; --rust:#B4532A; --moon:#8E8E8A; --mapbg:#3A3A3A;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151B; --panel:#1C2029; --fg:#ECEEF1; --muted:#A2A8B0; --rule:#30353F; --card:#171B22; --border:#444B57;
+  --hot:#FF6A5C; --cool:#7DA7E6; --gold:#F2B54E; --ink:#A9BBDD; --rust:#E08A5E; --moon:#B9B9B4; --mapbg:#202224; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151B; --panel:#1C2029; --fg:#ECEEF1; --muted:#A2A8B0; --rule:#30353F; --card:#171B22; --border:#444B57;
+  --hot:#FF6A5C; --cool:#7DA7E6; --gold:#F2B54E; --ink:#A9BBDD; --rust:#E08A5E; --moon:#B9B9B4; --mapbg:#202224; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:700px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1180px,calc(100vw - 32px));margin-left:calc((100% - min(1180px,100vw - 32px))/2);margin-right:0}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--ink);color:#fff;padding:5px 8px;font-weight:500}
+:root[data-theme="dark"] .kicker b{color:#12151B}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(42px,10vw,88px)/.92 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 .a{color:var(--hot)} h1 .m{color:var(--moon)} h1 .r{color:var(--rust)}
+.mark{width:clamp(78px,16vw,128px);height:auto;display:block;color:var(--fg)}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:56ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+h3{font:600 20px/1.25 var(--display);margin:28px 0 6px}
+p{margin:0 0 16px}
+.lede::first-letter{font:900 72px/.8 var(--display);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em}
+.stats b.h{color:var(--hot)} .stats b.c{color:var(--cool)} .stats b.g{color:var(--moon)} .stats b.r{color:var(--rust)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:300px;z-index:1000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.tip b{font-weight:500}
+.controls{display:flex;gap:8px;align-items:center;margin:0 0 10px;flex-wrap:wrap}
+.scrollrow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:2px;max-width:100%}
+.scrollrow .btn{flex:0 0 auto;white-space:nowrap}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px;flex:0 0 auto;align-self:center}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.2)}
+.btn svg{width:13px;height:13px;vertical-align:-2px;margin-right:5px}
+.btn:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.bodysw .btn{font-size:14px;padding:9px 16px}
+.bodysw .btn[data-b="moon"][aria-pressed="true"]{background:#55565A;border-color:#55565A;color:#fff}
+.bodysw .btn[data-b="mars"][aria-pressed="true"]{background:#B4532A;border-color:#B4532A;color:#fff}
+.timebox{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:10px;align-items:center;margin:0 0 10px;font:500 13px/1 var(--mono)}
+.timebox .yv{font:900 30px/1 var(--display);min-width:3.2ch;text-align:center;color:var(--hot)}
+.timebox input[type=range]{width:100%;accent-color:var(--hot);height:28px}
+.play{width:42px;height:38px;border-radius:3px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font:600 15px/1 var(--mono);cursor:pointer}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px;align-items:start}
+@media (max-width:900px){.mapgrid{grid-template-columns:1fr}}
+.side{background:var(--card);border:1px solid var(--border);padding:12px 12px 10px;font:400 13px/1.45 var(--mono);max-height:640px;overflow:auto}
+@media (max-width:900px){.side{max-height:none}}
+.side h4{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+.side h4:first-child{margin-top:2px}
+.side .big{font:800 26px/1.1 var(--display);margin:2px 0 4px}
+.side .sub{color:var(--muted);font-size:12px;margin:0 0 8px}
+.side ul{margin:4px 0 8px;padding-left:0;list-style:none}
+.side li{margin:3px 0;display:flex;gap:6px;align-items:baseline}
+.side li svg{flex:0 0 12px;width:12px;height:12px;align-self:center}
+.side li small{color:var(--muted)}
+.go{cursor:pointer;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}
+.lmap{height:620px;border:1px solid var(--border);background:var(--mapbg);border-radius:2px;position:relative}
+@media (max-width:600px){.lmap{height:min(64vh,470px)}.mapnote{font-size:11px;max-width:62%}}
+.maplibregl-map{font:400 12px/1.4 var(--mono)}
+.mk{cursor:pointer;line-height:0}
+.mk svg{display:block;overflow:visible;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45))}
+.mk.sel svg{filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 2px #fff)}
+.mlab{font:600 11px/1.15 var(--mono);color:#fff;white-space:nowrap;text-shadow:0 0 3px #000,0 0 3px #000,0 0 2px #000;pointer-events:none}
+.mlab.site{font:italic 400 12px/1.15 var(--body);color:#FBEFC9}
+.gratlab{font:400 10px/1 var(--mono);color:rgba(255,255,255,.75);text-shadow:0 0 2px #000;pointer-events:none}
+.lyrCtl{margin:10px 0 0 10px}
+.lyrBtn{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;font:600 12px/1 var(--mono);padding:8px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.lyrBtn[aria-expanded="true"]{background:var(--fg);color:var(--bg)}
+.lyrPanel{background:var(--card,var(--bg));color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:240px;box-shadow:0 2px 10px rgba(0,0,0,.2);font:400 12px/1.3 var(--mono);max-height:min(60vh,460px);overflow:auto}
+.lyrPanel[hidden]{display:none}
+.lyrPanel .row{margin:0 0 9px}
+.lyrPanel label{display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:600}
+.lyrPanel input[type=range]{width:100%;accent-color:var(--fg)}
+.lyrPanel .sub{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:11px;margin-top:3px}
+.lyrPanel .sub span{flex:0 0 58px}
+.lyrPanel .reset{font:400 11px var(--mono);color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.mapnote{position:absolute;left:10px;top:52px;z-index:1;background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--border);border-radius:3px;padding:6px 9px;font:400 12px/1.35 var(--mono);max-width:min(330px,70%);box-shadow:0 1px 4px rgba(0,0,0,.15);color:var(--fg)}
+.mapnote:empty{display:none}
+.maplibregl-ctrl-attrib{font:400 11px/1.3 var(--mono)!important}
+.maplibregl-popup-content{background:var(--card);color:var(--fg);font:400 12.5px/1.45 var(--mono);padding:11px 13px;border:1px solid var(--border);border-radius:4px;box-shadow:0 3px 12px rgba(0,0,0,.25);max-width:310px}
+.maplibregl-popup-content b.t{display:block;font:800 17px/1.15 var(--display);margin-bottom:4px}
+.maplibregl-popup-content .k{color:var(--muted)}
+.maplibregl-popup-content a{font-weight:500}
+.maplibregl-popup-tip{border-top-color:var(--card)!important;border-bottom-color:var(--card)!important}
+.maplibregl-popup-close-button{color:var(--fg);font-size:18px;padding:0 6px}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px;align-items:center}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:13px;height:13px;margin-right:6px;border-radius:2px}
+.legend svg{width:14px;height:14px;margin-right:6px}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--hot);padding:4px 0 4px 18px;margin:30px 0}
+.note{background:var(--panel);border:1px solid var(--rule);padding:14px 16px;font-size:16px;margin:22px 0}
+.note h3{margin-top:0}
+table.tbl{width:100%;border-collapse:collapse;font:400 13px/1.4 var(--mono)}
+table.tbl th{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 6px 6px 0;border-bottom:2px solid var(--fg);position:sticky;top:0;background:var(--card)}
+table.tbl td{padding:6px 6px 6px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+table.tbl td.r,table.tbl th.r{text-align:right;white-space:nowrap}
+table.tbl tr[data-id]{cursor:pointer}
+table.tbl tr[data-id]:hover td{background:var(--panel)}
+.tablebox{max-height:460px;overflow:auto;border:1px solid var(--border);background:var(--card);padding:0 10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--border);padding:11px 12px;font:400 13px/1.42 var(--mono);cursor:pointer}
+.card b{display:block;font:700 15px/1.2 var(--display);margin-bottom:4px}
+.card small{color:var(--muted)}
+.card:hover{border-color:var(--fg)}
+details{margin:14px 0}
+summary{font:500 13px/1.4 var(--mono);cursor:pointer;color:var(--fg);padding:8px 0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--hot);border-color:var(--hot);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>Space</span><span>The Moon and Mars, 1959 to 2026</span></div>
+<header class="hero">
+  <h1><span class="a">Junk</span> on the <span class="m">Moon</span> and <span class="r">Mars</span></h1>
+  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">Every human-made object on the Moon and Mars, from the first Soviet probe to hit the Moon in 1959 to the private landers of the 2020s: {{moon.n|int}} things on the Moon and {{mars.n|int}} on Mars. Where they are, who left them, how heavy they are, and which few still work.</p>
+</header>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Data: Wikipedia (CC BY-SA 4.0); base maps: OpenPlanetaryMap</div>
+
+<div class="stats">
+  <div><b class="g">{{moon.n|int}}</b><span>objects on the Moon: {{moon.n_table|int}} listed by Wikipedia plus {{moon.n_items|int}} small Apollo items</span></div>
+  <div><b class="h">{{mass.moon_t|f1}} t</b><span>of hardware on the Moon, {{mass.us_moon_pct|int}}% of it American</span></div>
+  <div><b class="r">{{mars.n|int}}</b><span>objects on Mars, {{mass.mars_t|f1}} tonnes in all</span></div>
+  <div><b class="c">{{land.mars.ok|int}} of {{land.mars.n|int}}</b><span>attempts to land on Mars worked; on the Moon, {{land.moon.ok|int}} of {{land.moon.n|int}}</span></div>
+</div>
+
+<p class="lede">On 13 September 1959 a Soviet probe called Luna 2 slammed into the Moon at high speed, and a {{first.luna2_stage_kg|int}} kg rocket stage followed it down. They were the first human-made things to reach another world. Since then we have scattered a surprising amount of hardware across the Moon and Mars: robot landers and rovers, probes that crashed on purpose and others that crashed by accident, the empty rocket stages of the Apollo missions, and the small, strange souvenirs left by the twelve men who walked on the Moon, from flags and golf balls to a Bible and a tiny aluminium statue.</p>
+<p>Wikipedia keeps a list of all of it. I turned those lists, and the articles around them, into one table of {{moon.n|int}} objects on the Moon and {{mars.n|int}} on Mars, and put them on maps of both worlds. Switch between them below, drag the slider to watch the junk pile up, and click anything to see what it is.</p>
+
+<h2><span class="n">01 · The map</span>Two worlds, one switch</h2>
+<div class="bleed" id="atlas">
+<div class="controls"><div class="scrollrow bodysw" id="bodyRow"><span class="ctl-l">World</span><button class="btn" data-b="moon" aria-pressed="true">The Moon</button><button class="btn" data-b="mars" aria-pressed="false">Mars</button></div>
+  <div class="scrollrow" id="modeRow"><span class="ctl-l">Show</span><button class="btn" data-m="upto" aria-pressed="true">Everything up to</button><button class="btn" data-m="dec" aria-pressed="false">That decade only</button></div></div>
+<div class="timebox"><button class="play" id="play" aria-label="Play through the years">&#9654;</button><span class="yv" id="yv">2026</span><input type="range" id="yr" min="1959" max="2026" step="1" value="2026" aria-label="Year"><span id="ylab" style="color:var(--muted);font-size:12px">all years to here</span></div>
+<div class="controls"><div class="scrollrow" id="typeRow"><span class="ctl-l">What</span></div></div>
+<div class="controls"><div class="scrollrow" id="groupRow"><span class="ctl-l">Who</span></div></div>
+<div class="mapgrid">
+  <div><div id="map" class="lmap" role="application" aria-label="Map of human-made objects on the Moon or Mars"><div class="mapnote" id="mapnote"></div></div>
+    <div class="legend" id="legend"></div></div>
+  <div class="side" id="side" aria-live="polite"></div>
+</div>
+<p class="src">Symbols: what each object is; colour: the country or agency that left it. Objects that share a spot are spread on a small ring so each can be clicked. Small Apollo items (flags, plaques, the golf balls and so on) are not in Wikipedia's tables: I placed each at its landing site's coordinates, so their positions are the site, not the exact spot. {{moon.no_coords|int}} Moon objects have no known position and appear only in the lists. Web maps cannot show the poles, so objects beyond 85 degrees are drawn at the map's edge; the chart in section 06 shows the south pole properly. Data: Wikipedia, CC BY-SA 4.0. Base maps: {{meta.att|raw}}.</p>
+</div>
+
+<h2><span class="n">02 · How much</span>{{mass.moon_t|f1}} tonnes on the Moon, {{mass.mars_t|f1}} on Mars</h2>
+<p>Adding up the masses in Wikipedia's tables, counting each figure once, gives {{mass.moon_kg|int}} kg on the Moon. That is about {{mass.moon_vs_mars_x|int}} times the {{mass.mars_kg|int}} kg on Mars, which is much harder to reach. The United States left {{mass.us_moon_pct|int}}% of the lunar total and the Soviet Union and Russia {{mass.su_moon_pct|int}}%. China, a latecomer, has already left {{mass.moon_by.China.kg|t}} tonnes. The Apollo missions alone account for {{mass.apollo_pct|int}}%, and most of that is five objects: the third stages of the Saturn V rockets from Apollo 13 to 17, each about 14 tonnes, which were deliberately crashed into the Moon for seismic research. Together they weigh {{mass.sivb_kg|t}} tonnes, {{mass.sivb_pct|int}}% of everything on the Moon.</p>
+<div class="figure"><p class="fig-h">Who left the most mass</p><p class="fig-sub">Tonnes, by country or agency. Kilograms as Wikipedia lists them, each shared or repeated figure counted once. The two worlds use different scales. Hover a bar.</p><div class="chart" id="massChart"></div></div>
+<p>The totals are rough. Some masses in the table are launch masses, with fuel that was burned on the way; two are upper or lower bounds; and the article itself gives two other totals, "over {{wiki.intro_kg|raw}} kilograms" in its introduction and {{mass.wiki_table_kg|int}} kg at the foot of its table. Mars is better documented and lighter: the American share there is {{mass.us_mars_pct|int}}%, and the heaviest single object is China's Tianwen-1 lander at {{heaviest_mars.0.kg|int}} kg.</p>
+<div class="figure"><p class="fig-h">The heaviest things on another world</p><p class="fig-sub">The fifteen heaviest objects, all on the Moon. Click a row to find it on the map.</p><div class="tablebox"><table class="tbl" id="heavyTable"></table></div></div>
+
+<h2><span class="n">03 · When</span>Two booms, sixty years apart</h2>
+<p>The Moon's junk arrived in two waves. In the 1960s the United States and the Soviet Union raced to get there: {{boom.moon_1960s_table|int}} objects in Wikipedia's table arrived that decade, and {{boom.moon_1970s_table|int}} more in the 1970s, with the Apollo landings, the Soviet sample return probes and the Lunokhod rovers. Then nothing at all: no object in the list reached the Moon between 1977 and 1989. The second wave is happening now. With the decade not yet over, the 2020s have already brought {{boom.moon_2020s_table|int}}, more than the 2000s ({{boom.moon_2000s_table|int}}) and 2010s ({{boom.moon_2010s_table|int}}) put together.</p>
+<div class="figure"><p class="fig-h">Objects arriving per decade</p><p class="fig-sub">Every object with a year, by what it is. Moon on the left of each pair, Mars on the right. Year as listed: for a few spacecraft that orbited before crashing it is the launch year. Hover a bar.</p><div class="chart" id="decChart"></div><div class="legend" id="decLegend"></div></div>
+<p>The new wave is more crowded and more varied. Objects from {{boom.n_countries|int}} countries have reached the Moon since 2020: China's Chang'e 5 and 6, which brought samples home, the second from the far side; India's Chandrayaan-3, which landed near the south pole in 2023; Japan's precision lander SLIM; and a run of private landers. Of the {{boom.private_n|int}} objects in the table built or flown by companies, from SpaceIL's Beresheet in 2019 to a SpaceX rocket stage that hit the Moon in 2026, only {{boom.private_soft|int}} landed softly: Intuitive Machines' IM-1 and IM-2 and Firefly's Blue Ghost.</p>
+<div class="figure"><p class="fig-h">Everything that reached the Moon since 2020</p><p class="fig-sub">From Wikipedia's table. Click a row to find it on the map.</p><div class="tablebox"><table class="tbl" id="boomTable"></table></div></div>
+
+<h2><span class="n">04 · Landing</span>Mars is harder</h2>
+<p>Landing softly on another world is still difficult. Wikipedia's list of landings records {{land.moon.n|int}} attempts at a soft landing on the Moon, of which {{land.moon.ok|int}} worked ({{land.moon.pct|int}}%). The first was Luna 9 on 3 February 1966. China is four for four; the Soviet Union and Russia {{land.moon.by.Soviet Union and Russia.ok|int}} for {{land.moon.by.Soviet Union and Russia.n|int}}, including Luna 25 in 2023; and of the {{land.moon.commercial.n|int}} commercial attempts, {{land.moon.commercial.ok|int}} succeeded. Mars is harder still: {{land.mars.ok|int}} of {{land.mars.n|int}} attempts worked ({{land.mars.pct|int}}%). The United States landed {{land.mars.by.United States.ok|int}} of its {{land.mars.by.United States.n|int}}; the Soviet Union's Mars 3 touched down in 1971 but fell silent within two minutes; Europe's Beagle 2 and Schiaparelli both failed; and China's Tianwen-1 put the Zhurong rover down at the first try in 2021.</p>
+<div class="figure"><p class="fig-h">Soft landing attempts that worked, by country</p><p class="fig-sub">Solid: landed and sent data back. Pale: attempts that crashed or fell silent. Deliberate impacts are not counted as attempts, and nor are landers lost before they arrived. Hover a bar.</p><div class="chart" id="landChart"></div></div>
+
+<h2><span class="n">05 · Still working</span>Almost everything is dead</h2>
+<p>Of the {{moon.n_table|int}} objects in the Moon table, {{moon.soft|int}} landed softly and {{moon.hard|int}} hit the surface hard, by accident or on purpose. Only {{moon.working|word}} are marked as still operating, all Chinese: the Chang'e 3 and Chang'e 4 landers and the Yutu-2 rover. (The article's introduction also counts Japan's SLIM.) But a handful of simpler objects are still in daily use: mirrors called retroreflectors, left by Apollo 11, 14 and 15 and carried by the Soviet Lunokhod 1 and 2 rovers and India's Chandrayaan-3 lander, still bounce laser pulses back to Earth so that scientists can measure the distance to the Moon. On Mars {{mars.soft|int}} of {{mars.n_table|int}} objects arrived intact, and {{mars.working|word}} are still at work: NASA's Curiosity and Perseverance rovers.</p>
+<div class="figure"><p class="fig-h">What happened to them</p><p class="fig-sub">Every row of Wikipedia's two tables, by its status. Hover a block.</p><div class="chart" id="statusChart"></div><div class="legend" id="statusLegend"></div></div>
+
+<h2><span class="n">06 · Near and far</span>The side we never see</h2>
+<p>The Moon always keeps the same face towards Earth, so the far side is hidden from us, and the Moon itself blocks radio contact with anything that lands there. Of the {{moon.with_coords_table|int}} objects in the table with a known position, {{moon.far_table|int}} ({{moon.far_pct|int}}%) are on the far side, more than 90 degrees east or west. Most of them crashed: Ranger 4 by accident in 1962, three Lunar Orbiters at the end of their missions. Only China has landed there: Chang'e 4 and its rover in 2019, talking to Earth through a relay satellite called Queqiao, and Chang'e 6, which brought back the first samples from the far side in 2024. The newest frontier is the south pole, where permanently shadowed craters may hold ice.</p>
+<div class="figure"><p class="fig-h">Around the Moon's south pole</p><p class="fig-sub">Objects south of 55 degrees, seen from above the pole. Rings every 10 degrees of latitude. Hover a symbol.</p><div class="chart" id="poleChart" style="max-width:560px;margin:0 auto"></div></div>
+
+<h2><span class="n">07 · Souvenirs</span>Flags, golf balls and a Fallen Astronaut</h2>
+<p>Wikipedia's table leaves out the small things the Apollo crews left behind, but its articles name many of them. I added {{moon.n_items|int}} of them by hand. All six crews planted an American flag; pictures from orbit show that five are still standing, while Apollo 11's was blown over by the engine as the crew took off. Each Lunar Module has a commemorative plaque on its ladder. Alan Shepard hit golf balls on Apollo 14. David Scott of Apollo 15 left a Bible, and a {{fun.fallen_cm|f1}} cm aluminium figure called the Fallen Astronaut beside a plaque bearing the names of {{fun.fallen_names|int}} American astronauts and Soviet cosmonauts who had died. And a small vial of the ashes of the lunar scientist Eugene Shoemaker rode Lunar Prospector into a polar crater in 1999: the only human remains on the Moon.</p>
+<div class="cards" id="cards"></div>
+<p>Mars has its own leftovers, which the article mentions without listing: heat shields and parachutes, the counterweights Curiosity threw off as it came in to land, a metal cover ejected by Viking 2, Soviet pennants on the Mars 2 and 3 landers, and a depot of sealed rock samples that Perseverance laid down in 2022 for a future mission to collect.</p>
+
+<h2><span class="n">08 · Every object</span>The whole list</h2>
+<div class="figure"><p class="fig-h">Everything on <span id="tblBody">the Moon</span></p><p class="fig-sub">Follows the world chosen on the map. Click a row to find it.</p><div class="tablebox"><table class="tbl" id="objTable"></table></div></div>
+
+<h2><span class="n">09 · How I did this</span>Methods and caveats</h2>
+<p><b>Data.</b> Everything comes from English Wikipedia (CC BY-SA 4.0). The core is the table in "List of artificial objects on the Moon" ({{moon.n_table|int}} rows) and the one in "List of artificial objects on Mars" ({{mars.n_table|int}} rows), each with a country or agency, year, mass, status and position. I parsed them cell by cell, expanding merged cells, removing footnote markers and converting longitudes given from 0 to 360 degrees, or as west longitudes, to the usual -180 to 180. Where a mass is shared between two rows, or repeated for a rover (Yutu and Yutu-2 carry their landers' figures), I count it once. Objects without coordinates keep none; I do not guess.</p>
+<p><b>Additions and checks.</b> The small items come from the text of the two lists and of the articles on the Moon landings, the Fallen Astronaut, the Apollo science packages and the Lunar Roving Vehicle; each has a sentence in its source that names it, and each is placed at its landing site. Landing dates and the success rates come from "List of landings on extraterrestrial bodies". That list and the object tables disagree by more than a degree on the position of {{n_disagree|int}} of the {{n_compared|int}} objects they share, including Luna 5, IM-1 and Mars Polar Lander; I keep the object tables' positions and note the other in the data. Some objects that people often mention, such as the falcon feather from Apollo 15 or Charlie Duke's family photograph, are not named in these articles, so they are not here.</p>
+<p><b>Types and status.</b> "What it is" is my classification from each row's name: rocket stages and Lunar Module ascent stages; rovers (and Mars's Ingenuity helicopter); landers that arrived intact; and impacts or crashes, which include orbiters that ended their missions by hitting the surface. Rows such as "Luna 17 and Lunokhod 1" hold a lander and a rover together; I keep them as one object, as the table does. Status follows the colour each table gives its rows.</p>
+<details><summary>Sources and licences</summary>
+<ul>
+<li>Wikipedia contributors, "List of artificial objects on the Moon" (revision {{source.rev.List_of_artificial_objects_on_the_Moon|raw}}), "List of artificial objects on Mars" ({{source.rev.List_of_artificial_objects_on_Mars|raw}}), "List of landings on extraterrestrial bodies" ({{source.rev.List_of_landings_on_extraterrestrial_bodies|raw}}), "Moon landing" ({{source.rev.Moon_landing|raw}}), "Fallen Astronaut" ({{source.rev.Fallen_Astronaut|raw}}), "Apollo Lunar Surface Experiments Package" ({{source.rev.Apollo_Lunar_Surface_Experiments_Package|raw}}), "Lunar Roving Vehicle" ({{source.rev.Lunar_Roving_Vehicle|raw}}), "List of missions to the Moon" ({{source.rev.List_of_missions_to_the_Moon|raw}}) and "List of missions to Mars" ({{source.rev.List_of_missions_to_Mars|raw}}). CC BY-SA 4.0. The object table derived from them is shared under the same licence.</li>
+<li>Base maps: {{meta.att|raw}}, tiles served by OpenPlanetaryMap.</li>
+</ul></details>
+
+<div class="cta"><a class="p" href="https://doi.org/10.5281/zenodo.23872995">Read the paper</a><a href="https://github.com/Tristan-Hotham/moon-mars">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/31/moon-mars/">Blog post</a></div>
+
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) Junk on the Moon and Mars: a map of every human-made object on two worlds. Zenodo. <a href="https://doi.org/10.5281/zenodo.23872995">https://doi.org/10.5281/zenodo.23872995</a></p>
+<p>Data: Wikipedia (CC BY-SA 4.0); the derived object table is CC BY-SA 4.0. Text, figures and other derived data CC BY 4.0; code MIT. Base maps: {{meta.att|raw}}.</p>
+<p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const R = /*RESULTS*/;
+const SITE = /*SITE*/;
+const GRAT = /*GRAT*/;
+const fmt = n => n == null || n === "" ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const tip = document.getElementById("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+document.addEventListener("click", e => { if (!e.target.closest("svg")) hideTip(); });
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const redraws = [];
+function resp(box, render) { let last = 0; const go = force => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); redraws.push(() => go(true)); }
+const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const small = () => innerWidth < 900;
+const C = SITE.cols, IX = Object.fromEntries(C.map((c, i) => [c, i]));
+const OBJ = SITE.rows.map(r => Object.fromEntries(C.map((c, i) => [c, r[i]])));
+const BYID = Object.fromEntries(OBJ.map(o => [o.id, o]));
+const GROUPS = SITE.groups, GC = GROUPS.map(g => g[1]), GNAME = GROUPS.map(g => g[0]);
+const TYPES = SITE.types, TNAME = TYPES.map(t => t[1]), TKEY = TYPES.map(t => t[0]);
+const STATUS = SITE.status;
+const BODY = { moon: "the Moon", mars: "Mars" };
+const gname = (g, body) => body === "mars" && g === 1 ? "Soviet Union" : GNAME[g];
+
+/* symbols: lander circle, rover square, impact cross, stage diamond, small item star */
+function sym(t, fill, s = 14, stroke = "#fff") {
+  const h = s / 2, sw = Math.max(1.2, s / 9);
+  const p = t === 0 ? `<circle cx="${h}" cy="${h}" r="${h - sw}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`
+    : t === 1 ? `<rect x="${sw}" y="${sw}" width="${s - 2 * sw}" height="${s - 2 * sw}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`
+    : t === 2 ? `<path d="M${sw} ${sw + s * .18}L${sw + s * .18} ${sw}L${h} ${h - s * .2}L${s - sw - s * .18} ${sw}L${s - sw} ${sw + s * .18}L${h + s * .2} ${h}L${s - sw} ${s - sw - s * .18}L${s - sw - s * .18} ${s - sw}L${h} ${h + s * .2}L${sw + s * .18} ${s - sw}L${sw} ${s - sw - s * .18}L${h - s * .2} ${h}Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw * .8}" stroke-linejoin="round"/>`
+    : t === 3 ? `<path d="M${h} ${sw}L${s - sw} ${h}L${h} ${s - sw}L${sw} ${h}Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`
+    : `<path d="${star(h, h, h - sw / 2, (h - sw / 2) * .45)}" fill="${fill}" stroke="${stroke === "#fff" ? "#1D2128" : stroke}" stroke-width="${sw * .8}" stroke-linejoin="round"/>`;
+  return `<svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" aria-hidden="true">${p}</svg>`;
+}
+function star(cx, cy, ro, ri) { let d = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? ri : ro; d += (i ? "L" : "M") + (cx + r * Math.cos(a)).toFixed(2) + " " + (cy + r * Math.sin(a)).toFixed(2); } return d + "Z"; }
+const objFill = o => o.t === 4 ? (o.body === "moon" ? "#FFFFFF" : "#FFF6E0") : GC[o.g];
+
+/* hero mark: a lander's legs on a cratered horizon, a small flag beside it */
+(function () {
+  const g = document.getElementById("heroMark");
+  el("path", { d: "M8 100 Q60 92 112 100", stroke: "currentColor", "stroke-width": 3, fill: "none" }, g);
+  el("ellipse", { cx: 88, cy: 101, rx: 12, ry: 3, fill: "none", stroke: "currentColor", "stroke-width": 1.6 }, g);
+  el("path", { d: "M34 60 L60 60 L66 76 L28 76 Z", fill: "#C8322B", stroke: "currentColor", "stroke-width": 2.2 }, g);
+  el("path", { d: "M38 60 L42 44 L52 44 L56 60", fill: "#E0A11B", stroke: "currentColor", "stroke-width": 2 }, g);
+  el("path", { d: "M30 76 L20 97 M64 76 L74 97 M47 76 L47 97", stroke: "currentColor", "stroke-width": 2.4, fill: "none" }, g);
+  el("path", { d: "M16 97 h8 M70 97 h8 M43 97 h8", stroke: "currentColor", "stroke-width": 2.4 }, g);
+  el("path", { d: "M96 98 L96 58", stroke: "currentColor", "stroke-width": 2 }, g);
+  el("path", { d: "M96 58 L114 62 L96 68 Z", fill: "#2F5FA7", stroke: "currentColor", "stroke-width": 1.4 }, g);
+  el("circle", { cx: 100, cy: 22, r: 9, fill: "#B4532A", stroke: "currentColor", "stroke-width": 1.6 }, g);
+})();
+
+/* ---------- state ---------- */
+const LYDEF = { imagery: true, labels: true, sites: false, grat: true, items: true, size: 15 };
+const LY = { ...LYDEF };
+try { Object.assign(LY, JSON.parse(localStorage.getItem("mm_layers") || "{}")); } catch (e) {}
+const saveLY = () => { try { localStorage.setItem("mm_layers", JSON.stringify(LY)); } catch (e) {} };
+const YMIN = 1959, YMAX = 2026;
+const S = { body: "moon", y: YMAX, mode: "upto", types: new Set(TKEY.map((t, i) => i)), groups: new Set(GROUPS.map((g, i) => i)), sel: null, play: null };
+const inWindow = o => { if (o.year == null) return S.mode === "upto" && S.y === YMAX; if (S.mode === "upto") return o.year <= S.y; const d = Math.floor(S.y / 10) * 10; return o.year >= d && o.year < d + 10; };
+const visible = o => o.body === S.body && inWindow(o) && S.types.has(o.t) && S.groups.has(o.g) && (LY.items || o.t !== 4);
+const placed = o => o.lat != null;
+
+/* ---------- map ---------- */
+const HOME = { moon: { center: [10, 10], zoom: small() ? 0.3 : 1.15 }, mars: { center: [20, 5], zoom: small() ? 0.3 : 1.15 } };
+let map = null, mapOK = false;
+function home() { if (!map) return; map.fitBounds([[-180, -72], [180, 72]], { padding: 8, animate: false }); }
+const MK = {};   // id -> {m, el}
+const note = document.getElementById("mapnote");
+function setNote(h) { note.innerHTML = h || ""; }
+try {
+  if (!window.maplibregl) throw new Error("no maplibre");
+  map = new maplibregl.Map({
+    container: "map", attributionControl: false, renderWorldCopies: false, maxZoom: 9, minZoom: 0, dragRotate: false, pitchWithRotate: false, touchPitch: false,
+    center: HOME.moon.center, zoom: HOME.moon.zoom,
+    style: { version: 8, sources: { base: { type: "raster", tiles: [SITE.tiles.moon], tileSize: 256, maxzoom: 7, attribution: SITE.att } ,
+                                    grat: { type: "geojson", data: GRAT } },
+             layers: [{ id: "bg", type: "background", paint: { "background-color": "#3A3A3A" } },
+                      { id: "base", type: "raster", source: "base", paint: { "raster-opacity": 1, "raster-fade-duration": 150 } },
+                      { id: "grat", type: "line", source: "grat", paint: { "line-color": "#FFFFFF", "line-opacity": .28, "line-width": .8 } }] }
+  });
+  map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+  map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-right");
+  map.touchZoomRotate.disableRotation();
+  let tileErr = 0;
+  map.on("error", e => { if (++tileErr === 1) setNote("<b>Base map tiles did not load.</b> The objects, filters and popups still work; the background is plain."); });
+  map.on("load", () => { mapOK = true; home(); applyLayers(); });
+  mapOK = true;
+} catch (e) { map = null; setNote("<b>The map library did not load.</b> The lists and charts below still work."); }
+
+/* symbols as HTML markers; objects at one spot are spread on a ring in pixels */
+function ringOffsets() {
+  const groups = {};
+  OBJ.forEach(o => { if (!placed(o)) return; const k = o.body + ":" + o.lat.toFixed(2) + ":" + o.lon.toFixed(2); (groups[k] = groups[k] || []).push(o); });
+  const off = {};
+  Object.values(groups).forEach(g => { g.sort((a, b) => a.t - b.t || a.year - b.year); const n = g.length;
+    g.forEach((o, i) => { if (n === 1) { off[o.id] = [0, 0]; return; } const a = -Math.PI / 2 + 2 * Math.PI * i / n, r = 9 + 2.6 * n; off[o.id] = [r * Math.cos(a), r * Math.sin(a)]; }); });
+  return off;
+}
+const OFF = ringOffsets();
+function buildMarkers() {
+  if (!map) return;
+  OBJ.forEach(o => {
+    if (!placed(o)) return;
+    const d = document.createElement("div"); d.className = "mk"; d.innerHTML = sym(o.t, objFill(o), LY.size); d.title = o.name; d.setAttribute("role", "button"); d.tabIndex = 0;
+    d.setAttribute("aria-label", o.name);
+    const m = new maplibregl.Marker({ element: d, anchor: "center", offset: OFF[o.id] }).setLngLat([o.lon, Math.max(-85, Math.min(85, o.lat))]);
+    d.addEventListener("click", e => { e.stopPropagation(); pick(o.id, false); });
+    d.addEventListener("keydown", e => { if (e.key === "Enter") pick(o.id, false); });
+    MK[o.id] = { m, el: d, on: false };
+  });
+}
+function resize() { OBJ.forEach(o => { const k = MK[o.id]; if (k) k.el.innerHTML = sym(o.t, objFill(o), LY.size); }); }
+function refresh() {
+  if (map) OBJ.forEach(o => { const k = MK[o.id]; if (!k) return; const v = visible(o); if (v && !k.on) { k.m.addTo(map); k.on = true; } else if (!v && k.on) { k.m.remove(); k.on = false; } });
+  placeLabels(); side(); legend();
+}
+let popup = null;
+function popHTML(o) {
+  const st = STATUS[o.s][1], ty = TNAME[o.t];
+  const when = o.date || (o.year ?? "year unknown");
+  const kg = o.kg == null ? "not given" : `${fmt(o.kg)} kg${o.kgnote ? ` <span class="k">(${esc(o.kgnote)})</span>` : ""}`;
+  const pos = o.lat == null ? "no known position" : `${Math.abs(o.lat).toFixed(2)}°${o.lat < 0 ? "S" : "N"} ${Math.abs(o.lon).toFixed(2)}°${o.lon < 0 ? "W" : "E"}${o.far ? ", far side" : ""}${Math.abs(o.lat) > 85 ? " (drawn at the map's edge)" : ""}`;
+  return `<b class="t">${esc(o.name)}</b><span class="k">Mission</span> ${esc(o.mission)}<br><span class="k">Who</span> ${esc(o.country)}${o.private ? ` (${esc(o.private)})` : ""}<br><span class="k">When</span> ${esc(when)}<br>`
+    + `<span class="k">What</span> ${esc(ty)}<br><span class="k">Mass</span> ${kg}<br><span class="k">Status</span> ${esc(st)}${o.status && !st.toLowerCase().includes(o.status.toLowerCase()) ? `: ${esc(o.status)}` : ""}<br>`
+    + `<span class="k">Where</span> ${pos}${o.site ? `, ${esc(o.site)}` : ""}${o.approxnote ? `<br><span class="k">${esc(o.approxnote)}</span>` : ""}<br><a href="${esc(o.wiki)}" target="_blank" rel="noopener">Wikipedia</a>`;
+}
+function pick(id, fly) {
+  const o = BYID[id]; if (!o) return;
+  if (o.body !== S.body) setBody(o.body);
+  if (!inWindow(o) || !S.types.has(o.t) || !S.groups.has(o.g) || (o.t === 4 && !LY.items)) { S.y = YMAX; S.mode = "upto"; S.types.add(o.t); S.groups.add(o.g); LY.items = true; syncAll(); refresh(); }
+  if (S.sel && MK[S.sel]) MK[S.sel].el.classList.remove("sel");
+  S.sel = id; if (MK[id]) MK[id].el.classList.add("sel");
+  if (!map || !placed(o)) { side(o); return; }
+  if (fly) map.flyTo({ center: [o.lon, Math.max(-84, Math.min(84, o.lat))], zoom: Math.max(map.getZoom(), 3.5), duration: 900 });
+  if (popup) popup.remove();
+  popup = new maplibregl.Popup({ offset: [OFF[id][0], OFF[id][1] - 10], maxWidth: "320px", focusAfterOpen: false }).setLngLat([o.lon, Math.max(-85, Math.min(85, o.lat))]).setHTML(popHTML(o)).addTo(map);
+  side(o);
+}
+const toMap = () => document.getElementById("atlas").scrollIntoView({ behavior: "smooth", block: "start" });
+
+/* labels: mission names and landing-site names as HTML markers, greedy placement without overlaps */
+const LAB = [];
+function placeLabels() {
+  LAB.forEach(m => m.remove()); LAB.length = 0;
+  if (!map) return;
+  const z = map.getZoom(), boxes = [];
+  OBJ.forEach(o => { const k = MK[o.id]; if (!k || !k.on) return; const p = map.project([o.lon, Math.max(-85, Math.min(85, o.lat))]); const h = LY.size / 2 + 1; boxes.push([p.x + OFF[o.id][0] - h, p.y + OFF[o.id][1] - h, p.x + OFF[o.id][0] + h, p.y + OFF[o.id][1] + h]); });
+  const W = map.getContainer().clientWidth, H = map.getContainer().clientHeight;
+  const ov = b => boxes.some(q => b[0] < q[2] && b[2] > q[0] && b[1] < q[3] && b[3] > q[1]);
+  const add = (lng, lat, html, cls, w, dx, dy = 0) => { const p = map.project([lng, lat]); const b = [p.x + dx, p.y + dy - 8, p.x + dx + w, p.y + dy + 8];
+    if (b[0] < 0 || b[2] > W || b[1] < 0 || b[3] > H || ov(b)) return false; boxes.push(b);
+    const d = document.createElement("div"); d.className = cls; d.innerHTML = html; LAB.push(new maplibregl.Marker({ element: d, anchor: "left", offset: [dx, dy] }).setLngLat([lng, lat]).addTo(map)); return true; };
+  if (LY.sites) SITE.sites.filter(s => s.body === S.body).forEach(s => { const w = s.name.length * 6.6 + 4, la = Math.max(-85, Math.min(85, s.lat));
+    add(s.lon, la, esc(s.name), "mlab site", w, -w / 2, LY.size + 16) || add(s.lon, la, esc(s.name), "mlab site", w, -w / 2, -(LY.size + 16)); });
+  if (LY.labels) {
+    const vis = new Set(OBJ.filter(o => o.body === S.body && MK[o.id] && MK[o.id].on).map(o => o.mission));
+    const ls = SITE.labels.filter(l => l.body === S.body && (l.major || z >= 3)).sort((a, b) => b.major - a.major);
+    ls.forEach(l => { const ok = OBJ.some(o => o.body === S.body && MK[o.id] && MK[o.id].on && Math.abs(o.lat - l.lat) < .01 && Math.abs(o.lon - l.lon) < .01); if (!ok) return;
+      add(l.lon, Math.max(-85, Math.min(85, l.lat)), esc(l.name), "mlab", l.name.length * 6.9 + 4, LY.size / 2 + 12); });
+  }
+  if (LY.grat && z < 4) { for (let lo = -150; lo <= 150; lo += 30) add(lo, 0, `${Math.abs(lo)}°${lo < 0 ? "W" : lo > 0 ? "E" : ""}`, "gratlab", 34, 3); for (let la = -60; la <= 60; la += 30) if (la) add(-178, la, `${Math.abs(la)}°${la < 0 ? "S" : "N"}`, "gratlab", 30, 3); }
+}
+function applyLayers() {
+  if (!map || !map.getLayer || !map.isStyleLoaded()) return;
+  try { map.setLayoutProperty("base", "visibility", LY.imagery ? "visible" : "none"); map.setLayoutProperty("grat", "visibility", LY.grat ? "visible" : "none"); } catch (e) {}
+  placeLabels();
+}
+function setBody(b) {
+  S.body = b; S.sel = null; if (popup) popup.remove();
+  document.querySelectorAll("#bodyRow .btn").forEach(x => x.setAttribute("aria-pressed", x.dataset.b === b));
+  if (map) { const src = map.getSource("base"); if (src && src.setTiles) src.setTiles([SITE.tiles[b]]);
+    try { map.setPaintProperty("bg", "background-color", b === "moon" ? "#3A3A3A" : "#6E3A22"); } catch (e) {}
+    home(); }
+  document.getElementById("map").style.background = b === "moon" ? "#3A3A3A" : "#6E3A22";
+  buildRows(); refresh(); objTable();
+}
+if (map) { buildMarkers(); map.on("moveend", placeLabels); map.on("click", () => { if (popup) popup.remove(); }); }
+
+/* layers panel, top left */
+(function layerControl() {
+  if (!map) return;
+  const d = document.createElement("div"); d.className = "maplibregl-ctrl lyrCtl";
+  d.innerHTML = `<button class="lyrBtn" aria-expanded="false">Map layers</button>
+<div class="lyrPanel" hidden>
+ <div class="row"><label><input type="checkbox" data-k="imagery"> Base map imagery</label></div>
+ <div class="row"><label><input type="checkbox" data-k="labels"> Mission labels</label></div>
+ <div class="row"><label><input type="checkbox" data-k="sites"> Landing-site names</label></div>
+ <div class="row"><label><input type="checkbox" data-k="grat"> Graticule (30° grid)</label></div>
+ <div class="row"><label><input type="checkbox" data-k="items"> Small items (flags, plaques...)</label></div>
+ <div class="row"><label style="font-weight:600">Symbol size</label><div class="sub"><span>size</span><input type="range" data-k="size" min="10" max="24" step="1" aria-label="Symbol size"></div></div>
+ <button class="reset">Reset layers</button>
+</div>`;
+  ["click", "dblclick", "mousedown", "touchstart", "wheel"].forEach(t => d.addEventListener(t, e => e.stopPropagation(), { passive: t !== "click" }));
+  map.addControl({ onAdd() { return d; }, onRemove() { d.remove(); } }, "top-left");
+  const btn = d.querySelector(".lyrBtn"), pan = d.querySelector(".lyrPanel");
+  btn.onclick = () => { const o = pan.hidden; pan.hidden = !o; btn.setAttribute("aria-expanded", o); };
+  const sync = () => pan.querySelectorAll("[data-k]").forEach(i => { const k = i.dataset.k; if (i.type === "checkbox") i.checked = LY[k]; else i.value = LY[k]; });
+  pan.querySelectorAll("[data-k]").forEach(i => i.addEventListener(i.type === "range" ? "input" : "change", () => {
+    const k = i.dataset.k; LY[k] = i.type === "checkbox" ? i.checked : +i.value; saveLY();
+    if (k === "size") resize(); if (k === "items") refresh(); else applyLayers();
+  }));
+  pan.querySelector(".reset").onclick = () => { Object.assign(LY, LYDEF); saveLY(); sync(); resize(); refresh(); applyLayers(); };
+  sync(); window.syncLayers = sync;
+})();
+
+/* ---------- controls ---------- */
+function buildRows() {
+  const tr = document.getElementById("typeRow"), gr = document.getElementById("groupRow");
+  tr.querySelectorAll(".btn").forEach(b => b.remove()); gr.querySelectorAll(".btn").forEach(b => b.remove());
+  TYPES.forEach((t, i) => { const n = OBJ.filter(o => o.body === S.body && o.t === i).length; if (!n) return;
+    const b = document.createElement("button"); b.className = "btn"; b.dataset.t = i; b.setAttribute("aria-pressed", S.types.has(i)); b.innerHTML = sym(i, i === 4 ? "#fff" : "#8C8478", 13, i === 4 ? "#1D2128" : "#fff") + esc(t[1]);
+    b.onclick = () => { S.types.has(i) ? S.types.delete(i) : S.types.add(i); b.setAttribute("aria-pressed", S.types.has(i)); refresh(); }; tr.appendChild(b); });
+  GROUPS.forEach((g, i) => { const n = OBJ.filter(o => o.body === S.body && o.g === i).length; if (!n) return;
+    const b = document.createElement("button"); b.className = "btn"; b.setAttribute("aria-pressed", S.groups.has(i)); b.innerHTML = `<i style="background:${g[1]}"></i>${esc(gname(i, S.body))}`;
+    b.onclick = () => { S.groups.has(i) ? S.groups.delete(i) : S.groups.add(i); b.setAttribute("aria-pressed", S.groups.has(i)); refresh(); }; gr.appendChild(b); });
+}
+function syncAll() {
+  document.getElementById("yr").value = S.y; document.getElementById("yv").textContent = S.y;
+  document.getElementById("ylab").textContent = S.mode === "upto" ? (S.y === YMAX ? "all years to here" : "everything up to this year") : `the ${Math.floor(S.y / 10) * 10}s only`;
+  document.querySelectorAll("#modeRow .btn").forEach(x => x.setAttribute("aria-pressed", x.dataset.m === S.mode));
+  if (window.syncLayers) syncLayers(); buildRows();
+}
+document.querySelectorAll("#bodyRow .btn").forEach(b => b.onclick = () => setBody(b.dataset.b));
+document.querySelectorAll("#modeRow .btn").forEach(b => b.onclick = () => { S.mode = b.dataset.m; syncAll(); refresh(); });
+const yr = document.getElementById("yr");
+yr.addEventListener("input", () => { S.y = +yr.value; syncAll(); refresh(); });
+document.getElementById("play").onclick = () => {
+  const pb = document.getElementById("play");
+  if (S.play) { clearInterval(S.play); S.play = null; pb.innerHTML = "&#9654;"; return; }
+  if (S.y >= YMAX) S.y = YMIN; pb.innerHTML = "&#10074;&#10074;";
+  S.play = setInterval(() => { S.y++; if (S.y > YMAX) { S.y = YMAX; clearInterval(S.play); S.play = null; pb.innerHTML = "&#9654;"; } syncAll(); refresh(); }, 260);
+};
+
+/* side panel: what is showing, or the picked object */
+function side(o) {
+  const sd = document.getElementById("side");
+  if (o) { sd.innerHTML = `<button class="btn" id="sideBack" style="min-height:0;padding:5px 8px;margin-bottom:8px">Back to summary</button>` + popHTML(o).replace('<b class="t">', '<div class="big">').replace("</b>", "</div>");
+    document.getElementById("sideBack").onclick = () => { S.sel = null; if (popup) popup.remove(); side(); }; return; }
+  const vs = OBJ.filter(visible), kg = vs.reduce((a, o) => a + (o.kg != null && !/counted once/.test(o.kgnote) ? o.kg : 0), 0);
+  const win = S.mode === "upto" ? (S.y === YMAX ? "to 2026" : `up to ${S.y}`) : `in the ${Math.floor(S.y / 10) * 10}s`;
+  let h = `<h4>${S.body === "moon" ? "The Moon" : "Mars"}, ${win}</h4><div class="big">${fmt(vs.length)} objects</div><p class="sub">${(kg / 1000).toFixed(1)} tonnes with a listed mass${vs.some(o => !placed(o)) ? `; ${vs.filter(o => !placed(o)).length} with no known position` : ""}</p><ul>`;
+  TYPES.forEach((t, i) => { const n = vs.filter(o => o.t === i).length; if (n) h += `<li>${sym(i, i === 4 ? "#fff" : "#8C8478", 12, i === 4 ? "#1D2128" : "#fff")}${n} ${esc(t[1].toLowerCase())}</li>`; });
+  h += `</ul><h4>Latest arrivals</h4><ul>` + vs.slice().sort((a, b) => (b.year || 0) - (a.year || 0) || b.t - a.t).slice(0, 9).map(o => `<li>${sym(o.t, objFill(o), 12)}<span class="go" data-id="${o.id}">${esc(o.name)}</span> <small>${o.year || ""}</small></li>`).join("") + `</ul>`;
+  h += `<p class="sub">Click a symbol, or a name, for details.</p>`;
+  sd.innerHTML = h;
+  sd.querySelectorAll(".go").forEach(x => x.onclick = () => pick(x.dataset.id, true));
+}
+function legend() {
+  const lg = document.getElementById("legend");
+  lg.innerHTML = TYPES.map((t, i) => OBJ.some(o => o.body === S.body && o.t === i) ? `<span>${sym(i, i === 4 ? "#fff" : "#8C8478", 14, i === 4 ? "#1D2128" : "#fff")}${esc(t[1])}</span>` : "").join("")
+    + GROUPS.map((g, i) => OBJ.some(o => o.body === S.body && o.g === i) ? `<span><i style="background:${g[1]}"></i>${esc(gname(i, S.body))}</span>` : "").join("");
+}
+
+/* ---------- charts ---------- */
+function hbars(box, panels, title) {
+  resp(box, (w, sm) => {
+    const rh = 26, lw = sm ? 126 : 150, two = !sm;
+    const rows = Math.max(...panels.map(p => p.rows.length));
+    const h = (two ? rows : panels.reduce((a, p) => a + p.rows.length + 2, 0)) * rh + (two ? 46 : 10);
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": title }, box);
+    panels.forEach((p, k) => {
+      const x0 = two ? (k * w / 2) + lw : lw, x1 = two ? (k + 1) * w / 2 - 96 : w - 96;
+      const y0 = two ? 0 : panels.slice(0, k).reduce((a, q) => a + (q.rows.length + 2) * rh, 0);
+      lbl(svg, x0 - lw, y0 + 16, p.title, "lab b");
+      const mx = p.max || Math.max(...p.rows.map(r => r.n || r.v));
+      p.rows.forEach((r, i) => { const y = y0 + 28 + i * rh;
+        lbl(svg, x0 - 8, y + 14, r.label, "lab", "end");
+        if (r.n != null) el("rect", { x: x0, y: y + 3, width: Math.max(1, (x1 - x0) * r.n / mx), height: rh - 8, fill: r.c, opacity: .28, rx: 2 }, svg);
+        const b = el("rect", { x: x0, y: y + 3, width: Math.max(1, (x1 - x0) * r.v / mx), height: rh - 8, fill: r.c, rx: 2 }, svg);
+        lbl(svg, x0 + (x1 - x0) * (r.n != null ? r.n : r.v) / mx + 6, y + 14, r.txt, "lab s b");
+        const hit = el("rect", { x: 0, y, width: w, height: rh, fill: "transparent" }, svg);
+        hit.style.cursor = "default"; hit.setAttribute("x", two ? k * w / 2 : 0); hit.setAttribute("width", two ? w / 2 : w);
+        hit.addEventListener("mousemove", ev => showTip(r.tip, ev.clientX, ev.clientY)); hit.addEventListener("mouseleave", hideTip); hit.addEventListener("click", ev => { ev.stopPropagation(); showTip(r.tip, ev.clientX, ev.clientY); });
+      });
+    });
+  });
+}
+function massChart() {
+  const pan = b => ({ title: `${b === "moon" ? "Moon" : "Mars"}: ${(R.mass[b + "_kg"] / 1000).toFixed(1)} tonnes`, rows: R.mass[b + "_groups"].slice().sort((a, c) => c.kg - a.kg).map(r => {
+    const gi = GNAME.indexOf(r.group); const nm = gname(gi, b).replace("Others (Israel, Luxembourg, UAE)", "Others");
+    return { label: nm.replace("Soviet Union and Russia", "USSR, Russia").replace("United States", "US").replace(" (ESA)", ""), v: r.kg, c: GC[gi], txt: r.kg >= 1000 ? `${(r.kg / 1000).toFixed(1)} t (${Math.round(r.pct)}%)` : `${fmt(r.kg)} kg`,
+      tip: `<b>${esc(gname(gi, b))}</b><br>${fmt(r.kg)} kg on ${BODY[b]}, ${r.pct}% of the total<br>${r.n} objects` }; }) });
+  hbars(document.getElementById("massChart"), [pan("moon"), pan("mars")], "Bar charts of mass left on the Moon and Mars by country");
+}
+function landChart() {
+  const pan = b => ({ title: `${b === "moon" ? "Moon" : "Mars"}: ${R.land[b].ok} of ${R.land[b].n} (${Math.round(R.land[b].pct)}%)`, max: Math.max(...R.land[b].rows.map(r => r.n)),
+    rows: R.land[b].rows.slice().sort((a, c) => c.n - a.n || c.ok - a.ok).map(r => { const gi = GNAME.indexOf(r.group);
+      return { label: gname(gi, b).replace("Others (Israel, Luxembourg, UAE)", "Israel").replace("Soviet Union and Russia", "USSR, Russia").replace("United States", "US").replace(" (ESA)", ""), v: r.ok, n: r.n, c: GC[gi],
+        txt: `${r.ok} of ${r.n}`, tip: `<b>${esc(gname(gi, b))}</b>: ${r.ok} of ${r.n} worked<br>Worked: ${esc(r.ok_missions.join(", ") || "none")}` }; }) });
+  hbars(document.getElementById("landChart"), [pan("moon"), pan("mars")], "Bar charts of soft landing attempts and successes by country, Moon and Mars");
+}
+function decChart() {
+  const D = R.decades, TC = ["#1F2F4D", "#2E9A8C", "#C8322B", "#8C8478", "#E0A11B"];
+  resp(document.getElementById("decChart"), (w, sm) => {
+    const h = sm ? 260 : 320, m = { l: 34, r: 8, t: 14, b: 30 }, svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Stacked bars of objects arriving on the Moon and Mars per decade" }, document.getElementById("decChart"));
+    const mx = 50, cw = (w - m.l - m.r) / D.length, bw = cw * .36, Y = v => (h - m.t - m.b) * v / mx;
+    for (let v = 0; v <= mx; v += 10) { const y = h - m.b - Y(v); el("line", { x1: m.l, x2: w - m.r, y1: y, y2: y, stroke: css("--rule") }, svg); lbl(svg, m.l - 6, y + 4, v, "lab s m", "end"); }
+    D.forEach((d, i) => {
+      ["moon", "mars"].forEach((b, k) => { let y = h - m.b; const x = m.l + i * cw + cw * .12 + k * (bw + cw * .04);
+        TKEY.forEach((t, j) => { const v = d[`${b}_${t}`]; if (!v) return; const hh = Y(v); y -= hh; el("rect", { x, y, width: bw, height: hh, fill: TC[j], opacity: b === "mars" ? .62 : 1, stroke: css("--bg"), "stroke-width": .6 }, svg); });
+        if (d[b]) lbl(svg, x + bw / 2, y - 4, d[b], "lab s", "middle");
+        const hr = el("rect", { x, y: m.t, width: bw, height: h - m.t - m.b, fill: "transparent" }, svg);
+        const tp = `<b>${b === "moon" ? "Moon" : "Mars"}, ${d.dec}s</b>: ${d[b]} objects<br>` + TKEY.map((t, j) => d[`${b}_${t}`] ? `${TNAME[j]} ${d[`${b}_${t}`]}` : "").filter(Boolean).join("<br>");
+        hr.addEventListener("mousemove", ev => showTip(tp, ev.clientX, ev.clientY)); hr.addEventListener("mouseleave", hideTip); hr.addEventListener("click", ev => { ev.stopPropagation(); showTip(tp, ev.clientX, ev.clientY); }); });
+      lbl(svg, m.l + i * cw + cw / 2, h - 10, sm ? `'${String(d.dec).slice(2)}` : `${d.dec}s`, "lab s m", "middle");
+    });
+    lbl(svg, m.l + 3.5 * cw, h - m.b - 16, "none", "lab s m", "middle");
+  });
+  document.getElementById("decLegend").innerHTML = TNAME.map((n, j) => `<span><i style="background:${["#1F2F4D", "#2E9A8C", "#C8322B", "#8C8478", "#E0A11B"][j]}"></i>${esc(n)}</span>`).join("") + `<span>Paler bars: Mars</span>`;
+}
+function statusChart() {
+  const SC = [["working", "#2E9A8C"], ["landed", "#1F2F4D"], ["failed", "#C8322B"], ["impact", "#8C8478"]];
+  resp(document.getElementById("statusChart"), (w, sm) => {
+    const lw = sm ? 60 : 90, h = 104, svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Status of every object in the two tables" }, document.getElementById("statusChart"));
+    ["moon", "mars"].forEach((b, k) => { const rows = OBJ.filter(o => o.body === b && o.table === 1), n = rows.length; let x = lw; const y = 8 + k * 48;
+      lbl(svg, lw - 8, y + 24, `${b === "moon" ? "Moon" : "Mars"}`, "lab b", "end");
+      SC.forEach(([s, c]) => { const v = rows.filter(o => STATUS[o.s][0] === s).length; if (!v) return; const ww = (w - lw - 4) * v / n;
+        const r = el("rect", { x, y, width: Math.max(1, ww - 1), height: 36, fill: c }, svg); if (ww > 26) lbl(svg, x + 6, y + 23, v, "lab b").setAttribute("style", "fill:#fff");
+        const tp = `<b>${b === "moon" ? "Moon" : "Mars"}: ${esc(STATUS.find(q => q[0] === s)[1])}</b><br>${v} of ${n}<br><small>${esc(rows.filter(o => STATUS[o.s][0] === s).slice(0, 8).map(o => o.name).join("; "))}${v > 8 ? "..." : ""}</small>`;
+        r.addEventListener("mousemove", ev => showTip(tp, ev.clientX, ev.clientY)); r.addEventListener("mouseleave", hideTip); r.addEventListener("click", ev => { ev.stopPropagation(); showTip(tp, ev.clientX, ev.clientY); }); x += ww; }); });
+  });
+  document.getElementById("statusLegend").innerHTML = SC.map(([s, c]) => `<span><i style="background:${c}"></i>${esc(STATUS.find(q => q[0] === s)[1])}</span>`).join("");
+}
+function poleChart() {
+  const P = OBJ.filter(o => o.body === "moon" && o.lat != null && o.lat <= -55 && o.t !== 4);
+  resp(document.getElementById("poleChart"), (w, sm) => {
+    const h = w, cx = w / 2, cy = h / 2, R0 = w / 2 - 34, rr = lat => R0 * (90 + lat) / 35;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Polar map of objects near the Moon's south pole" }, document.getElementById("poleChart"));
+    el("circle", { cx, cy, r: R0, fill: isDark() ? "#2A2C30" : "#E6E3DC", stroke: css("--border") }, svg);
+    [80, 70, 60].forEach(l => { el("circle", { cx, cy, r: rr(-l), fill: "none", stroke: css("--border"), "stroke-dasharray": "3 3" }, svg); lbl(svg, cx + 3, cy - rr(-l) - 3, `${l}°S`, "lab s m"); });
+    [[0, "0°"], [90, "90°E"], [180, "180°"], [-90, "90°W"]].forEach(([lo, t]) => { const a = lo * Math.PI / 180; const x = cx + R0 * Math.sin(a), y = cy - R0 * Math.cos(a);
+      el("line", { x1: cx, y1: cy, x2: x, y2: y, stroke: css("--border"), "stroke-dasharray": "2 4" }, svg); lbl(svg, cx + (R0 + 16) * Math.sin(a), cy - (R0 + 16) * Math.cos(a) + 4, t, "lab s m", "middle"); });
+    el("path", { d: `M${cx - 5} ${cy}h10M${cx} ${cy - 5}v10`, stroke: css("--muted"), "stroke-width": 1.2 }, svg);
+    const boxes = [];
+    P.sort((a, b) => a.lat - b.lat).forEach(o => { const a = o.lon * Math.PI / 180, x = cx + rr(o.lat) * Math.sin(a), y = cy - rr(o.lat) * Math.cos(a);
+      const g = el("g", { transform: `translate(${x - 7},${y - 7})` }, svg); const sv = document.importNode(new DOMParser().parseFromString(sym(o.t, objFill(o), 14).replace("<svg ", `<svg xmlns="${NS}" `), "image/svg+xml").documentElement, true); sv.setAttribute("style", "width:14px;height:14px;display:inline"); g.appendChild(sv);
+      g.style.cursor = "pointer"; const tp = `<b>${esc(o.name)}</b><br>${Math.abs(o.lat).toFixed(1)}°S, ${o.year}<br>${esc(STATUS[o.s][1])}`;
+      g.addEventListener("mousemove", ev => showTip(tp, ev.clientX, ev.clientY)); g.addEventListener("mouseleave", hideTip);
+      g.addEventListener("click", ev => { ev.stopPropagation(); toMap(); setTimeout(() => pick(o.id, true), 350); });
+      boxes.push([x - 7, y - 7, x + 7, y + 7]); });
+    const short = o => o.name.replace(/ lander.*| Vikram.*| Moon Impact Probe/, m => m === " Moon Impact Probe" ? " probe" : "").replace("SELENE (Kaguya) main orbiter", "Kaguya").replace("LCROSS Shepherding Spacecraft", "LCROSS").replace("LCROSS Centaur", "").replace(" Odysseus", "").replace(" Athena", "").replace(/ \(.*\)/, "");
+    if (!sm || w > 380) P.forEach(o => { const s = short(o); if (!s) return; const a = o.lon * Math.PI / 180, x = cx + rr(o.lat) * Math.sin(a), y = cy - rr(o.lat) * Math.cos(a);
+      for (const [dx, an] of [[10, "start"], [-10, "end"]]) { const tw = s.length * 6.6, b = an === "start" ? [x + dx, y - 6, x + dx + tw, y + 6] : [x + dx - tw, y - 6, x + dx, y + 6];
+        if (b[0] < 2 || b[2] > w - 2 || boxes.some(q => b[0] < q[2] && b[2] > q[0] && b[1] < q[3] && b[3] > q[1])) continue; boxes.push(b); lbl(svg, x + dx, y + 4, s, "lab s", an); break; } });
+  });
+}
+function tableRows(t, rows, cols) {
+  t.innerHTML = `<thead><tr>${cols.map(c => `<th${c[2] ? ' class="r"' : ""}>${c[0]}</th>`).join("")}</tr></thead><tbody>` + rows.map(o => `<tr data-id="${o.id}">${cols.map(c => `<td${c[2] ? ' class="r"' : ""}>${c[1](o)}</td>`).join("")}</tr>`).join("") + `</tbody>`;
+  t.querySelectorAll("tr[data-id]").forEach(r => r.onclick = () => { toMap(); setTimeout(() => pick(r.dataset.id, true), 350); });
+}
+const mcell = o => o.kg == null ? "" : fmt(o.kg);
+function heavyTable() { const ids = R.heaviest.map(h => OBJ.find(o => o.name === h.name && o.body === h.body)).filter(Boolean);
+  tableRows(document.getElementById("heavyTable"), ids, [["Object", o => `${sym(o.t, objFill(o), 12)} ${esc(o.name)}`], ["Who", o => esc(gname(o.g, o.body).replace(" and Russia", ""))], ["Year", o => o.year, 1], ["kg", mcell, 1]]); }
+function boomTable() { const rows = OBJ.filter(o => o.body === "moon" && o.table === 1 && o.year >= 2020);
+  tableRows(document.getElementById("boomTable"), rows, [["Object", o => `${sym(o.t, objFill(o), 12)} ${esc(o.name)}`], ["Who", o => esc(o.country) + (o.private ? ` <small>(${esc(o.private)})</small>` : "")], ["Year", o => o.year, 1], ["Status", o => esc(STATUS[o.s][1])]]); }
+function objTable() { document.getElementById("tblBody").textContent = S.body === "moon" ? "the Moon" : "Mars"; const rows = OBJ.filter(o => o.body === S.body).sort((a, b) => (a.year || 9999) - (b.year || 9999));
+  tableRows(document.getElementById("objTable"), rows, [["Object", o => `${sym(o.t, objFill(o), 12)} ${esc(o.name)}`], ["Who", o => esc(o.country)], ["Year", o => o.year ?? "", 1], ["kg", mcell, 1], ["Status", o => esc(STATUS[o.s][1])]]); }
+function cards() { const pick1 = ["Golf balls hit by Alan Shepard", "Fallen Astronaut statuette", "Apollo 11 United States flag", "Apollo 15 Laser Ranging Retroreflector", "Bible left by David Scott", "Ashes of Eugene Shoemaker (on Lunar Prospector)",
+    "Silver astronaut pin left by Alan Bean for Clifton C. Williams", "Apollo 11 goodwill messages disc", "Apollo 12 ALSEP fuel transfer tool (discarded)", "Three Forks Sample Depot (Perseverance sample tubes)", "Viking 2 surface sampler shroud", "Soviet pennant on the Mars 3 lander"];
+  const cs = pick1.map(n => OBJ.find(o => o.name === n)).filter(Boolean);
+  document.getElementById("cards").innerHTML = cs.map(o => `<div class="card" data-id="${o.id}" role="button" tabindex="0"><b>${esc(o.name)}</b>${esc(o.status)}<br><small>${esc(o.mission)}, ${o.year} · ${o.body === "moon" ? "Moon" : "Mars"}</small></div>`).join("");
+  document.querySelectorAll(".card").forEach(c => { c.onclick = () => { toMap(); setTimeout(() => pick(c.dataset.id, true), 350); }; c.onkeydown = e => { if (e.key === "Enter") c.onclick(); }; });
+}
+function charts() { massChart(); decChart(); landChart(); statusChart(); poleChart(); heavyTable(); boomTable(); cards(); objTable(); }
+
+/* ---------- start ---------- */
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; redraws.forEach(f => f()); };
+syncAll(); charts(); refresh();
+</script>
+/*FULLSCREEN*/
+</body>
+</html>

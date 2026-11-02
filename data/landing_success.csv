@@ -1,0 +1,11 @@
+body,country_group,attempts,succeeded,failed,success_pct,first_attempt_year,successes
+moon,United States,16,14,2,87.5,1966,Surveyor 1; Surveyor 3; Surveyor 5; Surveyor 6; Surveyor 7; Apollo 11; Apollo 12; Apollo 14; Apollo 15; Apollo 16; Apollo 17; IM-1 Odysseus; Blue Ghost M1 TO 19D; IM-2 Athena
+moon,Soviet Union and Russia,14,8,6,57.1,1965,Luna 9; Luna 13; Luna 16; Luna 17 / Lunokhod 1; Luna 20; Luna 21 / Lunokhod 2; Luna 23; Luna 24
+moon,China,4,4,0,100.0,2013,Chang'e 3; Chang'e 4; Chang'e 5; Chang'e 6
+moon,Japan,3,1,2,33.3,2023,Smart Lander for Investigating Moon (SLIM)
+moon,India,2,1,1,50.0,2019,Chandrayaan-3
+moon,"Others (Israel, Luxembourg, UAE)",1,0,1,0.0,2019,
+mars,United States,10,9,1,90.0,1976,Viking 1 lander; Viking 2 lander; Mars Pathfinder and Sojourner rover; MER-A Spirit; MER-B Opportunity; Phoenix; Mars Science Laboratory ( Curiosity ); InSight; Mars 2020 Perseverance rover and Ingenuity helicopter
+mars,Soviet Union and Russia,3,1,2,33.3,1971,Mars 3 lander
+mars,China,1,1,0,100.0,2021,Tianwen-1 lander and Zhurong rover
+mars,Europe (ESA),2,0,2,0.0,2003,

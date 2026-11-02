@@ -1,0 +1,76 @@
+body,mission,country_as_listed,country_group,date,lat,lon,soft_landing_attempt,soft_landing_success,crewed,sample,notes_as_listed
+mars,Mars 2 lander,USSR,Soviet Union and Russia,27 November 1971,-45.0,-30.0,1,0,0,0,First man-made object on Mars. No contact after crash landing.
+mars,Mars 3 lander,USSR,Soviet Union and Russia,2 December 1971,-45.0,-158.0,1,1,0,0,First soft landing on Mars. Transmission began about 90 seconds after landing. Transmitted a partial image for 14.5 seconds before the signal was lost.
+mars,Mars 6 lander,USSR,Soviet Union and Russia,12 March 1974,-23.9,-19.42,1,0,0,0,Contact lost at landing.
+mars,Viking 1 lander,USA,United States,20 July 1976,22.697,-48.222,1,1,0,0,"Successful soft landing. First to send images in color, as well as to perform in situ biological experiments with the Martian soil ."
+mars,Viking 2 lander,USA,United States,3 September 1976,48.269,134.01,1,1,0,0,Successful soft landing.
+mars,Mars Pathfinder and Sojourner rover,USA,United States,4 July 1997,19.13,-33.22,1,1,0,0,First airbag landing on Mars and first Mars rover.
+mars,Mars Polar Lander and two penetrators Deep Space 2,USA,United States,3 December 1999,73.0,150.0,1,0,0,0,Contact lost prior to landing.
+mars,Beagle 2,UK / ESA,Europe (ESA),25 December 2003,11.5265,90.4295,1,0,0,0,"Successful soft landing. No contact due to solar ""petals"" not deploying fully, blocking antenna."
+mars,MER-A Spirit,USA,United States,3 January 2004,-14.5718,175.4785,1,1,0,0,Mars rover. Contact lost 22 March 2010.
+mars,MER-B Opportunity,USA,United States,25 January 2004,-1.9462,-5.5266,1,1,0,0,Mars rover. Contact lost 10 June 2018.
+mars,Phoenix,USA,United States,25 May 2008,68.2188,-125.7492,1,1,0,0,Successful soft landing in the north polar region.
+mars,Mars Science Laboratory ( Curiosity ),USA,United States,6 August 2012,-4.5895,137.4417,1,1,0,0,Mars rover. Landed in Gale Crater.
+mars,ExoMars Schiaparelli EDM lander,ESA RFSA,Europe (ESA),19 October 2016,-2.07,-6.21,1,0,0,0,"Contact lost after entry and parachute deployment, but before planned landing. Hard impact on the surface."
+mars,InSight,USA,United States,26 November 2018,4.5,135.9,1,1,0,0,Successful soft landing.
+mars,Mars 2020 Perseverance rover and Ingenuity helicopter,USA,United States,18 February 2021,18.4447,77.4508,1,1,0,0,Mars rover and helicopter. Successful soft landing in Jezero Crater . Helicopter deployed from rover on 3 April 2021.
+mars,Tianwen-1 lander and Zhurong rover,China,China,14 May 2021,25.1,109.9,1,1,0,0,Successful soft landing in Utopia Planitia . Zhurong rover deployed on 22 May 2021.
+moon,Luna 2,USSR,Soviet Union and Russia,13 September 1959,29.1,0.0,0,0,0,0,Intentional hard impact.
+moon,Ranger 4,USA,United States,26 April 1962,-15.5,-130.7,0,0,0,0,Unintentional hard impact; hit lunar far side due to failure of navigation system.
+moon,Ranger 6,USA,United States,2 February 1964,9.4,21.5,0,0,0,0,Intentional hard impact.
+moon,Ranger 7,USA,United States,31 July 1964,-10.35,-20.58,0,0,0,0,Intentional hard impact.
+moon,Ranger 8,USA,United States,20 February 1965,2.72,24.61,0,0,0,0,Intentional hard impact.
+moon,Ranger 9,USA,United States,24 March 1965,-12.83,-2.37,0,0,0,0,Intentional hard impact.
+moon,Luna 5,USSR,Soviet Union and Russia,12 May 1965,-31.0,-8.0,1,0,0,0,Unsuccessful attempt at soft landing; crashed into Moon.
+moon,Luna 7,USSR,Soviet Union and Russia,7 October 1965,9.8,-47.8,1,0,0,0,Unsuccessful attempt at soft landing; crashed into Moon.
+moon,Luna 8,USSR,Soviet Union and Russia,6 December 1965,9.6,-62.0,1,0,0,0,Unsuccessful attempt at soft landing; crashed into Moon.
+moon,Luna 9,USSR,Soviet Union and Russia,3 February 1966,7.13,-64.37,1,1,0,0,First successful soft landing; first pictures from the surface.
+moon,Surveyor 1,USA,United States,2 June 1966,-2.47,-43.33,1,1,0,0,Soft landing.
+moon,Surveyor 2,USA,United States,23 September 1966,-4.0,-11.0,1,0,0,0,Unsuccessful attempt at soft landing; crashed into Moon.
+moon,Lunar Orbiter 1,USA,United States,29 October 1966,6.35,160.72,0,0,0,0,"Lunar orbiter, intentionally crashed at end of mission."
+moon,Luna 13,USSR,Soviet Union and Russia,24 December 1966,18.867,-62.05,1,1,0,0,Soft landing.
+moon,Surveyor 3,USA,United States,20 April 1967,-3.02818,-23.45821,1,1,0,0,Soft landing. First lander visited by a later crewed mission ( Apollo 12 ) that even brought its components.
+moon,Surveyor 4,USA,United States,17 July 1967,0.45,-1.39,1,0,0,0,Contact lost on descent.
+moon,Surveyor 5,USA,United States,11 September 1967,1.46,23.2,1,1,0,0,Soft landing.
+moon,Surveyor 6,USA,United States,10 November 1967,0.49,-1.4,1,1,0,0,Soft landing.
+moon,Surveyor 7,USA,United States,10 January 1968,-40.86,-11.47,1,1,0,0,Soft landing.
+moon,Apollo 11,USA,United States,20 July 1969,0.67408,23.47297,1,1,1,0,First crewed landing on an extraterrestrial body.
+moon,Luna 15,USSR,Soviet Union and Russia,21 July 1969,17.0,60.0,1,0,0,0,Possible attempted sample return; crashed into Moon. Not a crewed mission.
+moon,Apollo 12,USA,United States,18 November 1969,-3.01239,-23.42157,1,1,1,0,Crewed mission.
+moon,Apollo 13,USA,United States,14 April 1970,,,0,0,0,0,S-IVB stage crashed for seismic research (rocket stages from some other Apollo missions that successfully landed were also crashed in this manner )
+moon,Luna 16,USSR,Soviet Union and Russia,20 September 1970,-0.683,56.3,1,1,0,1,First successful robotic sample return.
+moon,Luna 17 / Lunokhod 1,USSR,Soviet Union and Russia,17 November 1970,38.283,-35.0,1,1,0,0,Robotic lunar rover .
+moon,Apollo 14,USA,United States,5 February 1971,-3.6453,-17.47136,1,1,1,0,Crewed mission.
+moon,Apollo 15,USA,United States,30 July 1971,26.13222,3.63386,1,1,1,0,Crewed mission; lunar rover.
+moon,Luna 18,USSR,Soviet Union and Russia,11 September 1971,3.567,56.5,1,0,0,0,Failed attempt at sample return; probable crash-landing.
+moon,Luna 20,USSR,Soviet Union and Russia,21 February 1972,3.533,56.55,1,1,0,1,Robotic sample return.
+moon,Apollo 16,USA,United States,21 April 1972,-8.97301,15.50019,1,1,1,0,Crewed mission; lunar rover.
+moon,Apollo 17,USA,United States,7 December 1972,20.1908,30.77168,1,1,1,0,Crewed mission; lunar rover. Last crewed landing on extraterrestrial bodies to date.
+moon,Luna 21 / Lunokhod 2,USSR,Soviet Union and Russia,8 January 1973,25.85,30.45,1,1,0,0,Robotic lunar rover .
+moon,Luna 23,USSR,Soviet Union and Russia,6 November 1974,12.6669,62.1511,1,1,0,0,Failed attempt at sample return; damaged on landing. Operated for 3 days on the surface.
+moon,Luna 24,USSR,Soviet Union and Russia,18 August 1976,12.75,62.2,1,1,0,1,Robotic sample return.
+moon,Hiten,Japan,Japan,10 April 1993,-34.3,55.6,0,0,0,0,"Lunar orbiter, intentionally crashed at end of mission."
+moon,Lunar Prospector,USA,United States,31 July 1999,-87.7,42.1,0,0,0,0,"Lunar orbiter, intentionally crashed into polar crater at end of mission to test for liberation of water vapour (not detected)."
+moon,SMART-1,ESA,Europe (ESA),3 September 2006,-34.262,-46.193,0,0,0,0,"Lunar orbiter, intentionally crashed at end of mission."
+moon,Chandrayaan-1 Moon Impact Probe,India,India,14 November 2008,-89.55,-122.93,0,0,0,0,Impactor. Water found.
+moon,SELENE Rstar (Okina),Japan,Japan,12 February 2009,28.213,-159.033,0,0,0,0,"Lunar orbiter, intentionally crashed at end of mission."
+moon,Chang'e 1,China,China,1 March 2009,-1.5,52.36,0,0,0,0,"Lunar orbiter, intentionally crashed at end of mission."
+moon,Kaguya,Japan,Japan,10 June 2009,-65.5,80.4,0,0,0,0,"Lunar orbiter, intentionally crashed at end of mission."
+moon,LCROSS (Centaur),USA,United States,9 October 2009,-84.675,-48.725,0,0,0,0,Impactors. Water confirmed.
+moon,LCROSS (Shepherding Spacecraft),USA,United States,9 October 2009,-84.675,-48.725,0,0,0,0,Impactors. Water confirmed.
+moon,Chang'e 3,China,China,14 December 2013,44.12,-19.51,1,1,0,0,"First soft landing on the Moon since 1976, lunar rover."
+moon,Chang'e 4,China,China,3 January 2019,-45.5,177.6,1,1,0,0,"First soft landing on the far side of the Moon, lunar rover."
+moon,Beresheet,Israel,"Others (Israel, Luxembourg, UAE)",11 April 2019,32.5956,19.3496,1,0,0,0,Israeli lunar lander crash landed on the Moon.
+moon,Chandrayaan-2,India,India,8 September 2019,-70.881,22.784,1,0,0,0,First attempt to land near the Moon's south pole; lost contact at 2.1 km and crashed.
+moon,Chang'e 5,China,China,1 December 2020,43.0576,-51.9161,1,1,0,1,First lunar sample return mission by China. Sample successfully returned to Earth on 16 December 2020.
+moon,Chang'e 5,China,China,7 December 2020,-30.0,0.0,0,0,0,0,Intentional impact of ascent stage after delivering sample to orbiter.
+moon,Hakuto-R Mission 1,Japan,Japan,25 April 2023,47.581,44.094,1,0,0,0,Unsuccessful attempt; contact was lost before landing alongside the lander being crash-landed.
+moon,Luna 25,Russia,Soviet Union and Russia,19 August 2023,-57.865,61.36,1,0,0,0,Unsuccessful attempt; crashed on lunar surface after failure during lunar orbit insertion.
+moon,Chandrayaan-3,India,India,23 August 2023,-69.373,32.319,1,1,0,0,Soft landing. First Indian soft landing. First soft landing in the south pole region of the Moon. Lunar rover.
+moon,Smart Lander for Investigating Moon (SLIM),Japan,Japan,19 January 2024,-13.316,25.251,1,1,0,0,Soft landing. First Japanese soft landing. Two lunar rovers.
+moon,IM-1 Odysseus,USA,United States,22 February 2024,-80.13,1.44,1,1,0,0,First successful soft landing by a commercial lander ( Nova-C lander made by Intuitive Machines ).
+moon,Chang'e 6,China,China,1 June 2024,-41.6385,-153.9852,1,1,0,1,First far side lunar sample return mission by China. Sample returned to Earth in June 2024.
+moon,Chang'e 6,China,China,6 June 2024,-39.0,180.0,0,0,0,0,Intentional impact of ascent stage conducted after delivering sample to orbiter.
+moon,Blue Ghost M1 TO 19D,USA,United States,2 March 2025,18.56,61.81,1,1,0,0,Commercial Blue Ghost lander made by Firefly Aerospace . Successful soft landing at Mare Crisium near Mons Latreille .
+moon,IM-2 Athena,USA,United States,6 March 2025,-85.0,-31.0,1,1,0,0,"Commercial Nova-C lander made by Intuitive Machines , damaged on landing. Operated for less than a day on the surface."
+moon,Hakuto-R Mission 2 Resilience,Japan,Japan,5 June 2025,60.5,-4.6,1,0,0,0,Commercial Hakuto-R lander made by ispace Inc. . Unsuccessful attempt; contact was lost before landing alongside the lander being crash-landed.

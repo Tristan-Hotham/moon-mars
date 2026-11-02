@@ -1,0 +1,1673 @@
+{
+ "source": {
+  "rev": {
+   "List_of_artificial_objects_on_the_Moon": 1370338372,
+   "List_of_artificial_objects_on_Mars": 1373656289,
+   "List_of_missions_to_the_Moon": 1380188613,
+   "List_of_missions_to_Mars": 1383270651,
+   "Moon_landing": 1380159374,
+   "List_of_landings_on_extraterrestrial_bodies": 1372275847,
+   "Golf_on_the_Moon": null,
+   "Lunar_flags_(Apollo)": null,
+   "Fallen_Astronaut": 1359569457,
+   "List_of_artificial_objects_on_extra-terrestrial_surfaces": 970828475,
+   "Apollo_Lunar_Surface_Experiments_Package": 1354555151,
+   "Lunar_Roving_Vehicle": 1380980067,
+   "Lunar_laser_ranging_experiments": null
+  },
+  "missing": [
+   "Golf_on_the_Moon",
+   "Lunar_flags_(Apollo)",
+   "Lunar_laser_ranging_experiments"
+  ],
+  "moon_rows": 104,
+  "mars_rows": 20,
+  "items_moon": 29,
+  "items_mars": 7,
+  "landing_rows": 75,
+  "year": 2026
+ },
+ "moon": {
+  "n": 133,
+  "n_table": 104,
+  "n_items": 29,
+  "types": {
+   "lander": 28,
+   "rover": 10,
+   "crash": 47,
+   "stage": 19,
+   "item": 29
+  },
+  "status": {
+   "working": 6,
+   "landed": 33,
+   "failed": 15,
+   "impact": 53,
+   "left": 26
+  },
+  "soft": 36,
+  "hard": 68,
+  "working": 3,
+  "no_coords": 17,
+  "no_coords_names": [
+   "Luna 10",
+   "Luna 11",
+   "Luna 12",
+   "Lunar Orbiter 4",
+   "Explorer 35",
+   "Luna 14",
+   "Apollo 10 LM-4 Snoopy descent stage",
+   "Luna 15",
+   "Apollo 11 LM-5 Eagle ascent stage",
+   "Luna 19",
+   "Apollo 15 subsatellite",
+   "Apollo 16 LM-11 Orion ascent stage",
+   "Apollo 16 subsatellite",
+   "Explorer 49 (RAE-B)",
+   "Luna 22",
+   "Hagoromo (released by Hiten)",
+   "SELENE Vstar (Ouna)"
+  ],
+  "approx": 27,
+  "countries": [
+   "China",
+   "European Space Agency",
+   "India",
+   "Israel",
+   "Japan",
+   "Luxembourg",
+   "Russia",
+   "Soviet Union",
+   "United Arab Emirates",
+   "United States"
+  ],
+  "n_groups": 7,
+  "first_year": 1959,
+  "rovers": [
+   "Lunokhod 1",
+   "Lunar Roving Vehicle",
+   "Lunar Roving Vehicle",
+   "Lunar Roving Vehicle",
+   "Lunokhod 2",
+   "Yutu",
+   "Yutu-2",
+   "Pragyan",
+   "Rashid",
+   "Pragyan",
+   "LEV-1",
+   "LEV-2",
+   "Jinchan",
+   "Tenacious",
+   "MAPP LV1",
+   "AstroAnt",
+   "Yaoki"
+  ],
+  "uncertain": 3,
+  "n_rovers": 17,
+  "n_countries": 10,
+  "soft_pct": 34.6,
+  "hard_pct": 65.4,
+  "working_names": [
+   "Chang'e 3 lander",
+   "Chang'e 4 lander",
+   "Chang'e 4 Yutu-2 rover"
+  ],
+  "far": 15,
+  "far_table": 15,
+  "near_table": 72,
+  "with_coords_table": 87,
+  "far_pct": 17.2,
+  "far_names": [
+   "Ranger 4",
+   "Lunar Orbiter 1",
+   "Lunar Orbiter 2",
+   "Lunar Orbiter 3",
+   "SELENE Rstar (Okina)",
+   "LADEE",
+   "Chang'e 4 lander",
+   "Chang'e 4 Yutu-2 rover",
+   "Longjiang-2",
+   "Chang'e 5-T1 third stage rocket",
+   "Manfred Memorial Moon Mission",
+   "Chang'e 6 descent stage",
+   "Jinchan rover",
+   "Chang'e 6 ascent stage",
+   "Falcon 9-425 upper stage (2025-010D)"
+  ],
+  "far_soft": [
+   "Chang'e 4 lander",
+   "Chang'e 4 Yutu-2 rover",
+   "Chang'e 6 descent stage",
+   "Jinchan rover"
+  ],
+  "table_soft_text": "40 major objects landed softly"
+ },
+ "mars": {
+  "n": 27,
+  "n_table": 20,
+  "n_items": 7,
+  "types": {
+   "lander": 8,
+   "rover": 7,
+   "crash": 4,
+   "stage": 0,
+   "item": 8
+  },
+  "status": {
+   "working": 2,
+   "landed": 12,
+   "failed": 6,
+   "impact": 0,
+   "left": 7
+  },
+  "soft": 16,
+  "hard": 4,
+  "working": 2,
+  "no_coords": 0,
+  "no_coords_names": [],
+  "approx": 11,
+  "countries": [
+   "China (CNSA)",
+   "European Space Agency (United Kingdom)",
+   "European Space Agency with Roscosmos",
+   "Soviet Union",
+   "United States (NASA)"
+  ],
+  "n_groups": 4,
+  "first_year": 1971,
+  "rovers": [
+   "PrOP-M",
+   "PrOP-M",
+   "Sojourner",
+   "Spirit",
+   "Opportunity",
+   "Curiosity",
+   "Perseverance",
+   "Ingenuity",
+   "Zhurong"
+  ],
+  "uncertain": 0,
+  "n_rovers": 9,
+  "n_countries": 5,
+  "soft_pct": 80.0,
+  "hard_pct": 20.0,
+  "working_names": [
+   "Curiosity (rover)",
+   "Perseverance (rover)"
+  ]
+ },
+ "reflectors": {
+  "apollo": [
+   "Apollo 11",
+   "Apollo 14",
+   "Apollo 15"
+  ],
+  "others": [
+   "Lunokhod 1",
+   "Lunokhod 2",
+   "Chandrayaan-3"
+  ],
+  "n": 6
+ },
+ "mass": {
+  "moon_kg": 203228,
+  "mars_kg": 10380,
+  "moon_t": 203.2,
+  "mars_t": 10.4,
+  "moon_groups": [
+   {
+    "group": "United States",
+    "kg": 117861.0,
+    "pct": 58.0,
+    "n": 80
+   },
+   {
+    "group": "Soviet Union and Russia",
+    "kg": 63535.0,
+    "pct": 31.3,
+    "n": 23
+   },
+   {
+    "group": "China",
+    "kg": 15052.0,
+    "pct": 7.4,
+    "n": 12
+   },
+   {
+    "group": "Japan",
+    "kg": 3046.1,
+    "pct": 1.5,
+    "n": 10
+   },
+   {
+    "group": "India",
+    "kg": 3258.0,
+    "pct": 1.6,
+    "n": 3
+   },
+   {
+    "group": "Europe (ESA)",
+    "kg": 307.0,
+    "pct": 0.2,
+    "n": 1
+   },
+   {
+    "group": "Others (Israel, Luxembourg, UAE)",
+    "kg": 169.0,
+    "pct": 0.1,
+    "n": 4
+   }
+  ],
+  "mars_groups": [
+   {
+    "group": "United States",
+    "kg": 5189.3,
+    "pct": 50.0,
+    "n": 16
+   },
+   {
+    "group": "Soviet Union and Russia",
+    "kg": 3055.0,
+    "pct": 29.4,
+    "n": 5
+   },
+   {
+    "group": "China",
+    "kg": 1526.0,
+    "pct": 14.7,
+    "n": 3
+   },
+   {
+    "group": "Europe (ESA)",
+    "kg": 610.2,
+    "pct": 5.9,
+    "n": 3
+   }
+  ],
+  "moon_vs_mars_x": 20,
+  "wiki_intro_kg": 187400,
+  "wiki_table_kg": 222729.0,
+  "no_mass_moon": 0,
+  "moon_by": {
+   "United States": {
+    "group": "United States",
+    "kg": 117861.0,
+    "pct": 58.0,
+    "n": 80
+   },
+   "Soviet Union and Russia": {
+    "group": "Soviet Union and Russia",
+    "kg": 63535.0,
+    "pct": 31.3,
+    "n": 23
+   },
+   "China": {
+    "group": "China",
+    "kg": 15052.0,
+    "pct": 7.4,
+    "n": 12
+   },
+   "Japan": {
+    "group": "Japan",
+    "kg": 3046.1,
+    "pct": 1.5,
+    "n": 10
+   },
+   "India": {
+    "group": "India",
+    "kg": 3258.0,
+    "pct": 1.6,
+    "n": 3
+   },
+   "Europe (ESA)": {
+    "group": "Europe (ESA)",
+    "kg": 307.0,
+    "pct": 0.2,
+    "n": 1
+   },
+   "Others (Israel, Luxembourg, UAE)": {
+    "group": "Others (Israel, Luxembourg, UAE)",
+    "kg": 169.0,
+    "pct": 0.1,
+    "n": 4
+   }
+  },
+  "mars_by": {
+   "United States": {
+    "group": "United States",
+    "kg": 5189.3,
+    "pct": 50.0,
+    "n": 16
+   },
+   "Soviet Union and Russia": {
+    "group": "Soviet Union and Russia",
+    "kg": 3055.0,
+    "pct": 29.4,
+    "n": 5
+   },
+   "China": {
+    "group": "China",
+    "kg": 1526.0,
+    "pct": 14.7,
+    "n": 3
+   },
+   "Europe (ESA)": {
+    "group": "Europe (ESA)",
+    "kg": 610.2,
+    "pct": 5.9,
+    "n": 3
+   }
+  },
+  "us_moon_pct": 58.0,
+  "su_moon_pct": 31.3,
+  "us_mars_pct": 50.0,
+  "sivb_n": 5,
+  "sivb_kg": 69468,
+  "sivb_pct": 34.2,
+  "diff_vs_table": 19501,
+  "apollo_kg": 100042,
+  "apollo_pct": 49.2,
+  "apollo_n": 51
+ },
+ "heaviest": [
+  {
+   "name": "Apollo 15 S-IVB (S-IVB-510)",
+   "body": "moon",
+   "kg": 14036,
+   "year": 1971,
+   "type": "stage",
+   "group": "United States"
+  },
+  {
+   "name": "Apollo 14 S-IVB (S-IVB-509)",
+   "body": "moon",
+   "kg": 14016,
+   "year": 1971,
+   "type": "stage",
+   "group": "United States"
+  },
+  {
+   "name": "Apollo 16 S-IVB (S-IVB-511)",
+   "body": "moon",
+   "kg": 14002,
+   "year": 1972,
+   "type": "stage",
+   "group": "United States"
+  },
+  {
+   "name": "Apollo 17 S-IVB (S-IVB-512)",
+   "body": "moon",
+   "kg": 13960,
+   "year": 1972,
+   "type": "stage",
+   "group": "United States"
+  },
+  {
+   "name": "Apollo 13 S-IVB (S-IVB-508)",
+   "body": "moon",
+   "kg": 13454,
+   "year": 1970,
+   "type": "stage",
+   "group": "United States"
+  },
+  {
+   "name": "Luna 2 rocket third stage (Vostok)",
+   "body": "moon",
+   "kg": 9100,
+   "year": 1959,
+   "type": "stage",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Luna 24 descent stage",
+   "body": "moon",
+   "kg": 5800,
+   "year": 1976,
+   "type": "lander",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Luna 20 descent stage",
+   "body": "moon",
+   "kg": 5727,
+   "year": 1972,
+   "type": "lander",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Luna 17 and Lunokhod 1",
+   "body": "moon",
+   "kg": 5600,
+   "year": 1970,
+   "type": "lander",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Luna 23",
+   "body": "moon",
+   "kg": 5600,
+   "year": 1974,
+   "type": "lander",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Luna 21 and Lunokhod 2",
+   "body": "moon",
+   "kg": 4850,
+   "year": 1973,
+   "type": "lander",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Luna 22",
+   "body": "moon",
+   "kg": 4000,
+   "year": 1974,
+   "type": "crash",
+   "group": "Soviet Union and Russia"
+  },
+  {
+   "name": "Falcon 9-425 upper stage (2025-010D)",
+   "body": "moon",
+   "kg": 3900,
+   "year": 2026,
+   "type": "stage",
+   "group": "United States"
+  },
+  {
+   "name": "Chang'e 5 descent stage",
+   "body": "moon",
+   "kg": 3200,
+   "year": 2020,
+   "type": "lander",
+   "group": "China"
+  },
+  {
+   "name": "Chang'e 6 descent stage",
+   "body": "moon",
+   "kg": 3200,
+   "year": 2024,
+   "type": "lander",
+   "group": "China"
+  }
+ ],
+ "heaviest_mars": [
+  {
+   "name": "Tianwen-1 (lander)",
+   "kg": 1285,
+   "year": 2021
+  },
+  {
+   "name": "Mars 2 lander and PrOP-M rover",
+   "kg": 1210,
+   "year": 1971
+  },
+  {
+   "name": "Mars 3 lander and PrOP-M rover",
+   "kg": 1210,
+   "year": 1971
+  },
+  {
+   "name": "Perseverance (rover)",
+   "kg": 1024,
+   "year": 2021
+  },
+  {
+   "name": "Curiosity (rover)",
+   "kg": 900,
+   "year": 2012
+  }
+ ],
+ "heaviest_soft": [
+  {
+   "name": "Luna 24 descent stage",
+   "kg": 5800,
+   "year": 1976
+  },
+  {
+   "name": "Luna 20 descent stage",
+   "kg": 5727,
+   "year": 1972
+  },
+  {
+   "name": "Luna 17 and Lunokhod 1",
+   "kg": 5600,
+   "year": 1970
+  },
+  {
+   "name": "Luna 23",
+   "kg": 5600,
+   "year": 1974
+  },
+  {
+   "name": "Luna 21 and Lunokhod 2",
+   "kg": 4850,
+   "year": 1973
+  }
+ ],
+ "first": {
+  "moon": "Luna 2",
+  "moon_date": "13 September 1959",
+  "moon_year": 1959,
+  "mars": "Mars 2 lander and PrOP-M rover",
+  "mars_date": "27 November 1971",
+  "luna2_stage_kg": 9100,
+  "luna2_kg": 390
+ },
+ "decades": [
+  {
+   "dec": 1950,
+   "moon": 2,
+   "moon_table": 2,
+   "moon_lander": 0,
+   "moon_rover": 0,
+   "moon_crash": 1,
+   "moon_stage": 1,
+   "moon_item": 0,
+   "mars": 0,
+   "mars_table": 0,
+   "mars_lander": 0,
+   "mars_rover": 0,
+   "mars_crash": 0,
+   "mars_stage": 0,
+   "mars_item": 0
+  },
+  {
+   "dec": 1960,
+   "moon": 44,
+   "moon_table": 34,
+   "moon_lander": 9,
+   "moon_rover": 0,
+   "moon_crash": 21,
+   "moon_stage": 4,
+   "moon_item": 10,
+   "mars": 0,
+   "mars_table": 0,
+   "mars_lander": 0,
+   "mars_rover": 0,
+   "mars_crash": 0,
+   "mars_stage": 0,
+   "mars_item": 0
+  },
+  {
+   "dec": 1970,
+   "moon": 46,
+   "moon_table": 28,
+   "moon_lander": 10,
+   "moon_rover": 3,
+   "moon_crash": 6,
+   "moon_stage": 9,
+   "moon_item": 18,
+   "mars": 8,
+   "mars_table": 5,
+   "mars_lander": 3,
+   "mars_rover": 0,
+   "mars_crash": 2,
+   "mars_stage": 0,
+   "mars_item": 3
+  },
+  {
+   "dec": 1980,
+   "moon": 0,
+   "moon_table": 0,
+   "moon_lander": 0,
+   "moon_rover": 0,
+   "moon_crash": 0,
+   "moon_stage": 0,
+   "moon_item": 0,
+   "mars": 0,
+   "mars_table": 0,
+   "mars_lander": 0,
+   "mars_rover": 0,
+   "mars_crash": 0,
+   "mars_stage": 0,
+   "mars_item": 0
+  },
+  {
+   "dec": 1990,
+   "moon": 4,
+   "moon_table": 3,
+   "moon_lander": 0,
+   "moon_rover": 0,
+   "moon_crash": 3,
+   "moon_stage": 0,
+   "moon_item": 1,
+   "mars": 3,
+   "mars_table": 3,
+   "mars_lander": 1,
+   "mars_rover": 1,
+   "mars_crash": 1,
+   "mars_stage": 0,
+   "mars_item": 0
+  },
+  {
+   "dec": 2000,
+   "moon": 7,
+   "moon_table": 7,
+   "moon_lander": 0,
+   "moon_rover": 0,
+   "moon_crash": 6,
+   "moon_stage": 1,
+   "moon_item": 0,
+   "mars": 5,
+   "mars_table": 4,
+   "mars_lander": 2,
+   "mars_rover": 2,
+   "mars_crash": 0,
+   "mars_stage": 0,
+   "mars_item": 1
+  },
+  {
+   "dec": 2010,
+   "moon": 9,
+   "moon_table": 9,
+   "moon_lander": 2,
+   "moon_rover": 2,
+   "moon_crash": 5,
+   "moon_stage": 0,
+   "moon_item": 0,
+   "mars": 5,
+   "mars_table": 3,
+   "mars_lander": 1,
+   "mars_rover": 1,
+   "mars_crash": 1,
+   "mars_stage": 0,
+   "mars_item": 2
+  },
+  {
+   "dec": 2020,
+   "moon": 20,
+   "moon_table": 20,
+   "moon_lander": 7,
+   "moon_rover": 5,
+   "moon_crash": 4,
+   "moon_stage": 4,
+   "moon_item": 0,
+   "mars": 6,
+   "mars_table": 5,
+   "mars_lander": 1,
+   "mars_rover": 3,
+   "mars_crash": 0,
+   "mars_stage": 0,
+   "mars_item": 2
+  }
+ ],
+ "boom": {
+  "moon_2020s": 20,
+  "moon_2020s_table": 20,
+  "moon_2010s_table": 9,
+  "moon_2000s_table": 7,
+  "moon_1960s_table": 34,
+  "moon_1970s_table": 28,
+  "moon_1980s_table": 0,
+  "moon_1990s_table": 3,
+  "groups": {
+   "United States": 4,
+   "Soviet Union and Russia": 1,
+   "China": 6,
+   "Japan": 5,
+   "India": 1,
+   "Others (Israel, Luxembourg, UAE)": 3
+  },
+  "countries": [
+   "China",
+   "India",
+   "Japan",
+   "Luxembourg",
+   "Russia",
+   "United Arab Emirates",
+   "United States"
+  ],
+  "n_countries": 7,
+  "private_n": 9,
+  "private": [
+   {
+    "name": "Beresheet",
+    "company": "SpaceIL",
+    "year": 2019,
+    "status": "failed"
+   },
+   {
+    "name": "Manfred Memorial Moon Mission",
+    "company": "LuxSpace",
+    "year": 2022,
+    "status": "impact"
+   },
+   {
+    "name": "Hakuto-R Mission 1",
+    "company": "ispace",
+    "year": 2023,
+    "status": "failed"
+   },
+   {
+    "name": "IM-1 Odysseus lander and EagleCam",
+    "company": "Intuitive Machines",
+    "year": 2024,
+    "status": "landed"
+   },
+   {
+    "name": "Blue Ghost M1",
+    "company": "Firefly Aerospace",
+    "year": 2025,
+    "status": "landed"
+   },
+   {
+    "name": "Hakuto-R Mission 2 Resilience",
+    "company": "ispace",
+    "year": 2025,
+    "status": "failed"
+   },
+   {
+    "name": "Tenacious rover",
+    "company": "ispace Europe",
+    "year": 2025,
+    "status": "failed"
+   },
+   {
+    "name": "IM-2 Athena lander, with MAPP LV1, Micro-Nova, AstroAnt and Yaoki",
+    "company": "Intuitive Machines",
+    "year": 2025,
+    "status": "landed"
+   },
+   {
+    "name": "Falcon 9-425 upper stage (2025-010D)",
+    "company": "SpaceX",
+    "year": 2026,
+    "status": "impact"
+   }
+  ],
+  "private_soft": 3,
+  "names": [
+   "Chang'e 5 descent stage",
+   "Chang'e 5 ascent stage",
+   "Chang'e 5-T1 third stage rocket",
+   "Manfred Memorial Moon Mission",
+   "Hakuto-R Mission 1",
+   "Emirates Lunar Mission",
+   "Luna 25",
+   "Chandrayaan-3 Vikram lander and Pragyan rover",
+   "SLIM",
+   "LEV-1",
+   "LEV-2",
+   "IM-1 Odysseus lander and EagleCam",
+   "Chang'e 6 descent stage",
+   "Jinchan rover",
+   "Chang'e 6 ascent stage",
+   "Blue Ghost M1",
+   "Hakuto-R Mission 2 Resilience",
+   "Tenacious rover",
+   "IM-2 Athena lander, with MAPP LV1, Micro-Nova, AstroAnt and Yaoki",
+   "Falcon 9-425 upper stage (2025-010D)"
+  ],
+  "since2019_table": 25,
+  "quiet_years": "1977 to 1989",
+  "gap_first_after": 1990
+ },
+ "mars_by_decade": {
+  "1950": 0,
+  "1960": 0,
+  "1970": 5,
+  "1980": 0,
+  "1990": 3,
+  "2000": 4,
+  "2010": 3,
+  "2020": 5
+ },
+ "land": {
+  "moon": {
+   "n": 40,
+   "ok": 28,
+   "pct": 70.0,
+   "by": {
+    "United States": {
+     "group": "United States",
+     "n": 16,
+     "ok": 14,
+     "fail": 2,
+     "pct": 87.5,
+     "first": 1966,
+     "missions": [
+      "Surveyor 1",
+      "Surveyor 2",
+      "Surveyor 3",
+      "Surveyor 4",
+      "Surveyor 5",
+      "Surveyor 6",
+      "Surveyor 7",
+      "Apollo 11",
+      "Apollo 12",
+      "Apollo 14",
+      "Apollo 15",
+      "Apollo 16",
+      "Apollo 17",
+      "IM-1 Odysseus",
+      "Blue Ghost M1 TO 19D",
+      "IM-2 Athena"
+     ],
+     "ok_missions": [
+      "Surveyor 1",
+      "Surveyor 3",
+      "Surveyor 5",
+      "Surveyor 6",
+      "Surveyor 7",
+      "Apollo 11",
+      "Apollo 12",
+      "Apollo 14",
+      "Apollo 15",
+      "Apollo 16",
+      "Apollo 17",
+      "IM-1 Odysseus",
+      "Blue Ghost M1 TO 19D",
+      "IM-2 Athena"
+     ]
+    },
+    "Soviet Union and Russia": {
+     "group": "Soviet Union and Russia",
+     "n": 14,
+     "ok": 8,
+     "fail": 6,
+     "pct": 57.1,
+     "first": 1965,
+     "missions": [
+      "Luna 5",
+      "Luna 7",
+      "Luna 8",
+      "Luna 9",
+      "Luna 13",
+      "Luna 15",
+      "Luna 16",
+      "Luna 17 / Lunokhod 1",
+      "Luna 18",
+      "Luna 20",
+      "Luna 21 / Lunokhod 2",
+      "Luna 23",
+      "Luna 24",
+      "Luna 25"
+     ],
+     "ok_missions": [
+      "Luna 9",
+      "Luna 13",
+      "Luna 16",
+      "Luna 17 / Lunokhod 1",
+      "Luna 20",
+      "Luna 21 / Lunokhod 2",
+      "Luna 23",
+      "Luna 24"
+     ]
+    },
+    "China": {
+     "group": "China",
+     "n": 4,
+     "ok": 4,
+     "fail": 0,
+     "pct": 100.0,
+     "first": 2013,
+     "missions": [
+      "Chang'e 3",
+      "Chang'e 4",
+      "Chang'e 5",
+      "Chang'e 6"
+     ],
+     "ok_missions": [
+      "Chang'e 3",
+      "Chang'e 4",
+      "Chang'e 5",
+      "Chang'e 6"
+     ]
+    },
+    "Japan": {
+     "group": "Japan",
+     "n": 3,
+     "ok": 1,
+     "fail": 2,
+     "pct": 33.3,
+     "first": 2023,
+     "missions": [
+      "Hakuto-R Mission 1",
+      "Smart Lander for Investigating Moon (SLIM)",
+      "Hakuto-R Mission 2 Resilience"
+     ],
+     "ok_missions": [
+      "Smart Lander for Investigating Moon (SLIM)"
+     ]
+    },
+    "India": {
+     "group": "India",
+     "n": 2,
+     "ok": 1,
+     "fail": 1,
+     "pct": 50.0,
+     "first": 2019,
+     "missions": [
+      "Chandrayaan-2",
+      "Chandrayaan-3"
+     ],
+     "ok_missions": [
+      "Chandrayaan-3"
+     ]
+    },
+    "Others (Israel, Luxembourg, UAE)": {
+     "group": "Others (Israel, Luxembourg, UAE)",
+     "n": 1,
+     "ok": 0,
+     "fail": 1,
+     "pct": 0.0,
+     "first": 2019,
+     "missions": [
+      "Beresheet"
+     ],
+     "ok_missions": []
+    }
+   },
+   "rows": [
+    {
+     "group": "United States",
+     "n": 16,
+     "ok": 14,
+     "fail": 2,
+     "pct": 87.5,
+     "first": 1966,
+     "missions": [
+      "Surveyor 1",
+      "Surveyor 2",
+      "Surveyor 3",
+      "Surveyor 4",
+      "Surveyor 5",
+      "Surveyor 6",
+      "Surveyor 7",
+      "Apollo 11",
+      "Apollo 12",
+      "Apollo 14",
+      "Apollo 15",
+      "Apollo 16",
+      "Apollo 17",
+      "IM-1 Odysseus",
+      "Blue Ghost M1 TO 19D",
+      "IM-2 Athena"
+     ],
+     "ok_missions": [
+      "Surveyor 1",
+      "Surveyor 3",
+      "Surveyor 5",
+      "Surveyor 6",
+      "Surveyor 7",
+      "Apollo 11",
+      "Apollo 12",
+      "Apollo 14",
+      "Apollo 15",
+      "Apollo 16",
+      "Apollo 17",
+      "IM-1 Odysseus",
+      "Blue Ghost M1 TO 19D",
+      "IM-2 Athena"
+     ]
+    },
+    {
+     "group": "Soviet Union and Russia",
+     "n": 14,
+     "ok": 8,
+     "fail": 6,
+     "pct": 57.1,
+     "first": 1965,
+     "missions": [
+      "Luna 5",
+      "Luna 7",
+      "Luna 8",
+      "Luna 9",
+      "Luna 13",
+      "Luna 15",
+      "Luna 16",
+      "Luna 17 / Lunokhod 1",
+      "Luna 18",
+      "Luna 20",
+      "Luna 21 / Lunokhod 2",
+      "Luna 23",
+      "Luna 24",
+      "Luna 25"
+     ],
+     "ok_missions": [
+      "Luna 9",
+      "Luna 13",
+      "Luna 16",
+      "Luna 17 / Lunokhod 1",
+      "Luna 20",
+      "Luna 21 / Lunokhod 2",
+      "Luna 23",
+      "Luna 24"
+     ]
+    },
+    {
+     "group": "China",
+     "n": 4,
+     "ok": 4,
+     "fail": 0,
+     "pct": 100.0,
+     "first": 2013,
+     "missions": [
+      "Chang'e 3",
+      "Chang'e 4",
+      "Chang'e 5",
+      "Chang'e 6"
+     ],
+     "ok_missions": [
+      "Chang'e 3",
+      "Chang'e 4",
+      "Chang'e 5",
+      "Chang'e 6"
+     ]
+    },
+    {
+     "group": "Japan",
+     "n": 3,
+     "ok": 1,
+     "fail": 2,
+     "pct": 33.3,
+     "first": 2023,
+     "missions": [
+      "Hakuto-R Mission 1",
+      "Smart Lander for Investigating Moon (SLIM)",
+      "Hakuto-R Mission 2 Resilience"
+     ],
+     "ok_missions": [
+      "Smart Lander for Investigating Moon (SLIM)"
+     ]
+    },
+    {
+     "group": "India",
+     "n": 2,
+     "ok": 1,
+     "fail": 1,
+     "pct": 50.0,
+     "first": 2019,
+     "missions": [
+      "Chandrayaan-2",
+      "Chandrayaan-3"
+     ],
+     "ok_missions": [
+      "Chandrayaan-3"
+     ]
+    },
+    {
+     "group": "Others (Israel, Luxembourg, UAE)",
+     "n": 1,
+     "ok": 0,
+     "fail": 1,
+     "pct": 0.0,
+     "first": 2019,
+     "missions": [
+      "Beresheet"
+     ],
+     "ok_missions": []
+    }
+   ],
+   "since2019": {
+    "n": 13,
+    "ok": 8,
+    "pct": 61.5
+   },
+   "crewed": 6,
+   "sample": 5,
+   "commercial": {
+    "n": 6,
+    "ok": 3,
+    "missions": [
+     "Beresheet",
+     "Hakuto-R Mission 1",
+     "IM-1 Odysseus",
+     "Blue Ghost M1 TO 19D",
+     "IM-2 Athena",
+     "Hakuto-R Mission 2 Resilience"
+    ]
+   },
+   "first_soft": "Luna 9, 3 February 1966"
+  },
+  "mars": {
+   "n": 16,
+   "ok": 11,
+   "pct": 68.8,
+   "by": {
+    "United States": {
+     "group": "United States",
+     "n": 10,
+     "ok": 9,
+     "fail": 1,
+     "pct": 90.0,
+     "first": 1976,
+     "missions": [
+      "Viking 1 lander",
+      "Viking 2 lander",
+      "Mars Pathfinder and Sojourner rover",
+      "Mars Polar Lander and two penetrators Deep Space 2",
+      "MER-A Spirit",
+      "MER-B Opportunity",
+      "Phoenix",
+      "Mars Science Laboratory ( Curiosity )",
+      "InSight",
+      "Mars 2020 Perseverance rover and Ingenuity helicopter"
+     ],
+     "ok_missions": [
+      "Viking 1 lander",
+      "Viking 2 lander",
+      "Mars Pathfinder and Sojourner rover",
+      "MER-A Spirit",
+      "MER-B Opportunity",
+      "Phoenix",
+      "Mars Science Laboratory ( Curiosity )",
+      "InSight",
+      "Mars 2020 Perseverance rover and Ingenuity helicopter"
+     ]
+    },
+    "Soviet Union and Russia": {
+     "group": "Soviet Union and Russia",
+     "n": 3,
+     "ok": 1,
+     "fail": 2,
+     "pct": 33.3,
+     "first": 1971,
+     "missions": [
+      "Mars 2 lander",
+      "Mars 3 lander",
+      "Mars 6 lander"
+     ],
+     "ok_missions": [
+      "Mars 3 lander"
+     ]
+    },
+    "China": {
+     "group": "China",
+     "n": 1,
+     "ok": 1,
+     "fail": 0,
+     "pct": 100.0,
+     "first": 2021,
+     "missions": [
+      "Tianwen-1 lander and Zhurong rover"
+     ],
+     "ok_missions": [
+      "Tianwen-1 lander and Zhurong rover"
+     ]
+    },
+    "Europe (ESA)": {
+     "group": "Europe (ESA)",
+     "n": 2,
+     "ok": 0,
+     "fail": 2,
+     "pct": 0.0,
+     "first": 2003,
+     "missions": [
+      "Beagle 2",
+      "ExoMars Schiaparelli EDM lander"
+     ],
+     "ok_missions": []
+    }
+   },
+   "rows": [
+    {
+     "group": "United States",
+     "n": 10,
+     "ok": 9,
+     "fail": 1,
+     "pct": 90.0,
+     "first": 1976,
+     "missions": [
+      "Viking 1 lander",
+      "Viking 2 lander",
+      "Mars Pathfinder and Sojourner rover",
+      "Mars Polar Lander and two penetrators Deep Space 2",
+      "MER-A Spirit",
+      "MER-B Opportunity",
+      "Phoenix",
+      "Mars Science Laboratory ( Curiosity )",
+      "InSight",
+      "Mars 2020 Perseverance rover and Ingenuity helicopter"
+     ],
+     "ok_missions": [
+      "Viking 1 lander",
+      "Viking 2 lander",
+      "Mars Pathfinder and Sojourner rover",
+      "MER-A Spirit",
+      "MER-B Opportunity",
+      "Phoenix",
+      "Mars Science Laboratory ( Curiosity )",
+      "InSight",
+      "Mars 2020 Perseverance rover and Ingenuity helicopter"
+     ]
+    },
+    {
+     "group": "Soviet Union and Russia",
+     "n": 3,
+     "ok": 1,
+     "fail": 2,
+     "pct": 33.3,
+     "first": 1971,
+     "missions": [
+      "Mars 2 lander",
+      "Mars 3 lander",
+      "Mars 6 lander"
+     ],
+     "ok_missions": [
+      "Mars 3 lander"
+     ]
+    },
+    {
+     "group": "China",
+     "n": 1,
+     "ok": 1,
+     "fail": 0,
+     "pct": 100.0,
+     "first": 2021,
+     "missions": [
+      "Tianwen-1 lander and Zhurong rover"
+     ],
+     "ok_missions": [
+      "Tianwen-1 lander and Zhurong rover"
+     ]
+    },
+    {
+     "group": "Europe (ESA)",
+     "n": 2,
+     "ok": 0,
+     "fail": 2,
+     "pct": 0.0,
+     "first": 2003,
+     "missions": [
+      "Beagle 2",
+      "ExoMars Schiaparelli EDM lander"
+     ],
+     "ok_missions": []
+    }
+   ]
+  }
+ },
+ "disagree": [
+  {
+   "name": "Luna 5",
+   "body": "moon",
+   "lat": 8.0,
+   "lon": -23.0,
+   "alt_lat": -31.0,
+   "alt_lon": -8.0,
+   "deg": 41.6
+  },
+  {
+   "name": "Luna 8",
+   "body": "moon",
+   "lat": 9.1,
+   "lon": -63.3,
+   "alt_lat": 9.6,
+   "alt_lon": -62.0,
+   "deg": 1.4
+  },
+  {
+   "name": "Lunar Orbiter 1",
+   "body": "moon",
+   "lat": 6.7,
+   "lon": 162.0,
+   "alt_lat": 6.35,
+   "alt_lon": 160.72,
+   "deg": 1.3
+  },
+  {
+   "name": "Surveyor 2",
+   "body": "moon",
+   "lat": 5.5,
+   "lon": -12.0,
+   "alt_lat": -4.0,
+   "alt_lon": -11.0,
+   "deg": 9.6
+  },
+  {
+   "name": "IM-1 Odysseus lander and EagleCam",
+   "body": "moon",
+   "lat": -84.9,
+   "lon": 12.9,
+   "alt_lat": -80.13,
+   "alt_lon": 1.44,
+   "deg": 5.0
+  },
+  {
+   "name": "IM-2 Athena lander, with MAPP LV1, Micro-Nova, AstroAnt and Yaoki",
+   "body": "moon",
+   "lat": -84.7906,
+   "lon": 29.1957,
+   "alt_lat": -85.0,
+   "alt_lon": -31.0,
+   "deg": 5.1
+  },
+  {
+   "name": "Mars 2 lander and PrOP-M rover",
+   "body": "mars",
+   "lat": -45.0,
+   "lon": 47.0,
+   "alt_lat": -45.0,
+   "alt_lon": -30.0,
+   "deg": 52.2
+  },
+  {
+   "name": "Mars Polar Lander and Deep Space 2 probes",
+   "body": "mars",
+   "lat": -76.0,
+   "lon": 165.0,
+   "alt_lat": 73.0,
+   "alt_lon": 150.0,
+   "deg": 149.3
+  }
+ ],
+ "n_disagree": 8,
+ "n_compared": 86,
+ "items": [
+  {
+   "name": "Apollo 11 United States flag",
+   "body": "moon",
+   "mission": "Apollo 11",
+   "year": 1969,
+   "note": "Blown over by the ascent engine's exhaust, as Buzz Aldrin reported",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Apollo 12 United States flag",
+   "body": "moon",
+   "mission": "Apollo 12",
+   "year": 1969,
+   "note": "Still standing and casting a shadow in LROC images",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Apollo 14 United States flag",
+   "body": "moon",
+   "mission": "Apollo 14",
+   "year": 1971,
+   "note": "Still standing and casting a shadow in LROC images",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Apollo 15 United States flag",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "Still standing and casting a shadow in LROC images",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Apollo 16 United States flag",
+   "body": "moon",
+   "mission": "Apollo 16",
+   "year": 1972,
+   "note": "Still standing and casting a shadow in LROC images",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Apollo 17 United States flag",
+   "body": "moon",
+   "mission": "Apollo 17",
+   "year": 1972,
+   "note": "Still standing and casting a shadow in LROC images",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Apollo 11 commemorative plaque on the Lunar Module ladder",
+   "body": "moon",
+   "mission": "Apollo 11",
+   "year": 1969,
+   "note": "On the ladder of the descent stage",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 12 commemorative plaque on the Lunar Module ladder",
+   "body": "moon",
+   "mission": "Apollo 12",
+   "year": 1969,
+   "note": "On the ladder of the descent stage",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 14 commemorative plaque on the Lunar Module ladder",
+   "body": "moon",
+   "mission": "Apollo 14",
+   "year": 1971,
+   "note": "On the ladder of the descent stage",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 15 commemorative plaque on the Lunar Module ladder",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "On the ladder of the descent stage",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 16 commemorative plaque on the Lunar Module ladder",
+   "body": "moon",
+   "mission": "Apollo 16",
+   "year": 1972,
+   "note": "On the ladder of the descent stage",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 17 commemorative plaque on the Lunar Module ladder",
+   "body": "moon",
+   "mission": "Apollo 17",
+   "year": 1972,
+   "note": "On the ladder of the descent stage",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 11 goodwill messages disc",
+   "body": "moon",
+   "mission": "Apollo 11",
+   "year": 1969,
+   "note": "Left by the Apollo 11 crew",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Silver astronaut pin left by Alan Bean for Clifton C. Williams",
+   "body": "moon",
+   "mission": "Apollo 12",
+   "year": 1969,
+   "note": "Left by Alan Bean in honour of the astronaut he replaced",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Golf balls hit by Alan Shepard",
+   "body": "moon",
+   "mission": "Apollo 14",
+   "year": 1971,
+   "note": "Hit by Alan Shepard during a moonwalk; the article does not say how many",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Bible left by David Scott",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "Left by David Scott",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Fallen Astronaut statuette",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "An 8.9 cm aluminium figure by Paul Van Hoeydonck, placed by David Scott on 2 August 1971 (UTC) at Hadley Rille",
+   "src": "Fallen_Astronaut"
+  },
+  {
+   "name": "Fallen Astronaut memorial plaque (14 names)",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "Names eight American astronauts and six Soviet cosmonauts who had died",
+   "src": "Fallen_Astronaut"
+  },
+  {
+   "name": "Apollo 11 Laser Ranging Retroreflector",
+   "body": "moon",
+   "mission": "Apollo 11",
+   "year": 1969,
+   "note": "Still in use: laser pulses from Earth are timed off it to measure the distance to the Moon",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 14 Laser Ranging Retroreflector",
+   "body": "moon",
+   "mission": "Apollo 14",
+   "year": 1971,
+   "note": "Still in use: laser pulses from Earth are timed off it to measure the distance to the Moon",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 15 Laser Ranging Retroreflector",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "Still in use: laser pulses from Earth are timed off it to measure the distance to the Moon",
+   "src": "List_of_artificial_objects_on_the_Moon"
+  },
+  {
+   "name": "Apollo 11 Early Apollo Scientific Experiments Package (EASEP)",
+   "body": "moon",
+   "mission": "Apollo 11",
+   "year": 1969,
+   "note": "A smaller science package deployed on the only Apollo 11 moonwalk",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Apollo 12 Apollo Lunar Surface Experiments Package (ALSEP)",
+   "body": "moon",
+   "mission": "Apollo 12",
+   "year": 1969,
+   "note": "Science station; support operations ended on 30 September 1977",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Apollo 14 Apollo Lunar Surface Experiments Package (ALSEP)",
+   "body": "moon",
+   "mission": "Apollo 14",
+   "year": 1971,
+   "note": "Science station; support operations ended on 30 September 1977",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Apollo 15 Apollo Lunar Surface Experiments Package (ALSEP)",
+   "body": "moon",
+   "mission": "Apollo 15",
+   "year": 1971,
+   "note": "Science station; support operations ended on 30 September 1977",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Apollo 16 Apollo Lunar Surface Experiments Package (ALSEP)",
+   "body": "moon",
+   "mission": "Apollo 16",
+   "year": 1972,
+   "note": "Science station; support operations ended on 30 September 1977",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Apollo 17 Apollo Lunar Surface Experiments Package (ALSEP)",
+   "body": "moon",
+   "mission": "Apollo 17",
+   "year": 1972,
+   "note": "Science station; support operations ended on 30 September 1977",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Apollo 12 ALSEP fuel transfer tool (discarded)",
+   "body": "moon",
+   "mission": "Apollo 12",
+   "year": 1969,
+   "note": "Discarded by Alan Bean after loading the nuclear power source",
+   "src": "Apollo_Lunar_Surface_Experiments_Package"
+  },
+  {
+   "name": "Ashes of Eugene Shoemaker (on Lunar Prospector)",
+   "body": "moon",
+   "mission": "Lunar Prospector",
+   "year": 1999,
+   "note": "A small vial carried by Lunar Prospector into Shoemaker crater; the only human remains on the Moon",
+   "src": "Moon_landing"
+  },
+  {
+   "name": "Soviet pennant on the Mars 2 lander",
+   "body": "mars",
+   "mission": "Mars 2",
+   "year": 1971,
+   "note": "A pennant carried on the lander",
+   "src": "List_of_artificial_objects_on_Mars"
+  },
+  {
+   "name": "Soviet pennant on the Mars 3 lander",
+   "body": "mars",
+   "mission": "Mars 3",
+   "year": 1971,
+   "note": "A pennant carried on the lander",
+   "src": "List_of_artificial_objects_on_Mars"
+  },
+  {
+   "name": "Viking 2 surface sampler shroud",
+   "body": "mars",
+   "mission": "Viking 2",
+   "year": 1976,
+   "note": "A metal cover thrown off by the lander and seen in its own pictures",
+   "src": "List_of_artificial_objects_on_Mars"
+  },
+  {
+   "name": "Opportunity heat shield",
+   "body": "mars",
+   "mission": "Mars Exploration Rover (Opportunity)",
+   "year": 2004,
+   "note": "Photographed by the rover",
+   "src": "List_of_artificial_objects_on_Mars"
+  },
+  {
+   "name": "Curiosity (MSL) counterweights ejected during descent",
+   "body": "mars",
+   "mission": "Mars Science Laboratory",
+   "year": 2012,
+   "note": "Dropped during descent",
+   "src": "List_of_artificial_objects_on_Mars"
+  },
+  {
+   "name": "Schiaparelli heat shields and parachute",
+   "body": "mars",
+   "mission": "ExoMars 2016",
+   "year": 2016,
+   "note": "Separate pieces of the entry system",
+   "src": "List_of_artificial_objects_on_Mars"
+  },
+  {
+   "name": "Three Forks Sample Depot (Perseverance sample tubes)",
+   "body": "mars",
+   "mission": "Mars 2020",
+   "year": 2022,
+   "note": "Backup depot of sealed sample tubes laid down by Perseverance for a later return to Earth",
+   "src": "List_of_artificial_objects_on_Mars"
+  }
+ ],
+ "fun": {
+  "flags": 6,
+  "flags_standing": 5,
+  "plaques": 6,
+  "alsep": 5,
+  "lrrr": 3,
+  "lrv": 3,
+  "fallen_names": 14,
+  "fallen_us": 8,
+  "fallen_su": 6,
+  "fallen_cm": 8.9,
+  "alsep_end": "30 September 1977"
+ },
+ "wiki": {
+  "intro_kg": "187,400",
+  "intro_lb": "413,100"
+ },
+ "meta": {
+  "page": "https://maps.tristanhotham.com/moon-mars/",
+  "repo": "https://github.com/Tristan-Hotham/moon-mars",
+  "doi": "10.5281/zenodo.23872995",
+  "blog": "https://blog.tristanhotham.com/2026/10/31/moon-mars/",
+  "slug": "moon-mars",
+  "att": "OpenPlanetaryMap basemaps (OpenPlanetary), from NASA and USGS data"
+ }
+}
